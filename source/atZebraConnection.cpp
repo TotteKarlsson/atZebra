@@ -1,5 +1,5 @@
 #pragma hdrstop
-#include "ZebraConnection.h"
+#include "atZebraConnection.h"
 #include "mtkIniFile.h"
 #include "mtkLogger.h"
 //---------------------------------------------------------------------------

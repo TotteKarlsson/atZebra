@@ -4,7 +4,7 @@
 #include "Poco/Mutex.h"
 #include "mtkLogger.h"
 #include "mtkUtils.h"
-#include "atZebra.h"
+#include "atZebraConnection.h"
 #include "atZebraApplicationMessages.h"
 #include "atZebraDataStructures.h"
 //---------------------------------------------------------------------------
@@ -13,7 +13,7 @@ using Poco::Mutex;
 using namespace mtk;
 
 //----------------------------------------------------------------
-ZebraMessageConsumer::ZebraMessageConsumer(Zebra& messageContainer,  HWND__ *h, const string& threadName)
+ZebraMessageConsumer::ZebraMessageConsumer(ZebraConnection& messageContainer,  HWND__ *h, const string& threadName)
 :
 mtk::Thread(threadName),
 mAllowProcessing(true),

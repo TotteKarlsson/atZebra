@@ -1,5 +1,5 @@
-#ifndef atZebraH
-#define atZebraH
+#ifndef atZebraConnectionH
+#define atZebraConnectionH
 #include "atABObject.h"
 #include "serial/atSerial.h"
 #include "atZebraMessage.h"
@@ -11,12 +11,12 @@ using mtk::gEmptyString;
 using std::deque;
 class ZebraMessageConsumer;
 
-class AT_CORE Zebra : public ABObject
+class AT_CORE ZebraConnection : public ABObject
 {
 	friend ZebraMessageConsumer;
 	public:
-										Zebra();
-										~Zebra();
+										ZebraConnection();
+										~ZebraConnection();
 
 		bool							connect(int comPort);
         bool							disConnect();
@@ -39,7 +39,7 @@ class AT_CORE Zebra : public ABObject
 
         Poco::Mutex						mBufferMutex;
         Poco::Condition					mNewMessageCondition;
-        deque<ZebraMessage> 				mIncomingMessagesBuffer;
+        deque<ZebraMessage> 			mIncomingMessagesBuffer;
 
 
 };

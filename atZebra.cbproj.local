@@ -1,2 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<BorlandProject/>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2017/02/16 14:22:22.671,=P:\barcodereader\SerialAPP\source\atZebra.cpp</Transaction>
+    <Transaction>2017/02/16 14:35:09.498,P:\barcodereader\SerialAPP\atZebraConnection.cpp=P:\barcodereader\SerialAPP\ZebraConnection.cpp</Transaction>
+    <Transaction>2017/02/16 14:35:09.498,P:\barcodereader\SerialAPP\atZebraConnection.h=P:\barcodereader\SerialAPP\ZebraConnection.h</Transaction>
+  </Transactions>
+</BorlandProject>

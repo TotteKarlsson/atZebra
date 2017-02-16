@@ -1,7 +1,7 @@
 object MainForm: TMainForm
   Left = 0
   Top = 0
-  Caption = 'UC7 Controller'
+  Caption = 'Zebra Test Application'
   ClientHeight = 643
   ClientWidth = 983
   Color = clBtnFace
@@ -46,126 +46,6 @@ object MainForm: TMainForm
       Height = 388
       Align = alLeft
       TabOrder = 0
-      object HandwheelGB: TGroupBox
-        Left = 1
-        Top = 240
-        Width = 318
-        Height = 147
-        Align = alBottom
-        Caption = 'Handwheel Position'
-        TabOrder = 0
-        object mCrankPositionPie: TPie
-          Left = 95
-          Top = 36
-          Width = 90
-          Height = 90
-          Angles.StartAngle = 90
-          Angles.EndAngle = 180
-          Brush.Color = clCream
-        end
-        object mRetractLbl: TLabel
-          Left = 40
-          Top = 36
-          Width = 36
-          Height = 13
-          Caption = 'Retract'
-          Enabled = False
-        end
-        object Label2: TLabel
-          Left = 191
-          Top = 36
-          Width = 70
-          Height = 13
-          Caption = 'Before Cutting'
-          Enabled = False
-        end
-        object Label3: TLabel
-          Left = 191
-          Top = 116
-          Width = 35
-          Height = 13
-          Caption = 'Cutting'
-          Enabled = False
-        end
-        object Label4: TLabel
-          Left = 40
-          Top = 116
-          Width = 63
-          Height = 13
-          Caption = 'After Cutting'
-          Enabled = False
-        end
-      end
-      object GroupBox3: TGroupBox
-        Left = 1
-        Top = 1
-        Width = 318
-        Height = 239
-        Align = alClient
-        Caption = 'Cutting Motor Controls'
-        TabOrder = 1
-        object mStartStopBtn: TButton
-          Left = 40
-          Top = 24
-          Width = 219
-          Height = 81
-          Caption = 'Start'
-          Enabled = False
-          TabOrder = 0
-          OnClick = mStartStopBtnClick
-        end
-        object Panel2: TPanel
-          Left = 2
-          Top = 128
-          Width = 314
-          Height = 109
-          Align = alBottom
-          BevelOuter = bvNone
-          TabOrder = 1
-          object GroupBox1: TGroupBox
-            Left = 149
-            Top = 0
-            Width = 165
-            Height = 109
-            Align = alClient
-            Caption = 'Return Speed (um/s)'
-            TabOrder = 0
-            object FloatLabeledEdit2: TFloatLabeledEdit
-              Left = 6
-              Top = 48
-              Width = 89
-              Height = 21
-              EditLabel.Width = 30
-              EditLabel.Height = 13
-              EditLabel.Caption = 'Speed'
-              TabOrder = 0
-              Text = '-1.00'
-              Value = -1.000000000000000000
-            end
-          end
-          object GroupBox2: TGroupBox
-            Left = 0
-            Top = 0
-            Width = 149
-            Height = 109
-            Align = alLeft
-            Caption = 'Cutting Speed (um/s)'
-            TabOrder = 1
-            object FloatLabeledEdit1: TFloatLabeledEdit
-              Left = 12
-              Top = 48
-              Width = 89
-              Height = 21
-              EditLabel.Width = 30
-              EditLabel.Height = 13
-              EditLabel.Caption = 'Speed'
-              TabOrder = 0
-              Text = '-1.00'
-              Value = -1.000000000000000000
-            end
-          end
-        end
-      end
     end
   end
   object SB: TStatusBar
@@ -237,8 +117,6 @@ object MainForm: TMainForm
     Height = 41
     Align = alTop
     TabOrder = 3
-    ExplicitLeft = -1
-    ExplicitTop = -4
     object mComportCB: TComboBox
       Left = 8
       Top = 12
@@ -288,22 +166,12 @@ object MainForm: TMainForm
       TabOrder = 2
       OnClick = mSendBtn1Click
     end
-    object mResetBtn: TButton
-      Left = 897
-      Top = 1
-      Width = 85
-      Height = 39
-      Align = alRight
-      Caption = 'Reset UC7'
-      Enabled = False
-      TabOrder = 4
-    end
     object mCheckSumEdit: TSTDStringEdit
       Left = 504
       Top = 10
       Width = 49
       Height = 21
-      TabOrder = 5
+      TabOrder = 4
       Text = 'CC'
       Value = 'CC'
     end
@@ -338,8 +206,8 @@ object MainForm: TMainForm
     end
   end
   object PopupMenu1: TPopupMenu
-    Left = 512
-    Top = 232
+    Left = 272
+    Top = 440
     object ClearMemoA1: TMenuItem
       Action = ClearMemoA
     end
@@ -351,8 +219,8 @@ object MainForm: TMainForm
     Top = 88
   end
   object MainMenu1: TMainMenu
-    Left = 533
-    Top = 136
+    Left = 413
+    Top = 248
     object File1: TMenuItem
       Caption = 'File'
       object Exit1: TMenuItem
@@ -370,7 +238,7 @@ object MainForm: TMainForm
     Enabled = False
     Interval = 50
     OnTimer = ShutDownTimerTimer
-    Left = 578
-    Top = 72
+    Left = 506
+    Top = 240
   end
 end

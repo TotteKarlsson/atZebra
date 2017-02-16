@@ -146,6 +146,9 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <CppCompile Include="atZebra.cpp">
             <BuildOrder>0</BuildOrder>
         </CppCompile>
+        <CppCompile Include="atZebraConnection.cpp">
+            <BuildOrder>10</BuildOrder>
+        </CppCompile>
         <CppCompile Include="auto_link.cpp">
             <BuildOrder>8</BuildOrder>
         </CppCompile>
@@ -184,9 +187,6 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <FormType>dfm</FormType>
             <DependentOn>UI\TMainForm.h</DependentOn>
             <BuildOrder>2</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="ZebraConnection.cpp">
-            <BuildOrder>10</BuildOrder>
         </CppCompile>
         <FormResources Include="UI\TMainForm.dfm"/>
         <BuildConfiguration Include="Release">

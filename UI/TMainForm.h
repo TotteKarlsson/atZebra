@@ -66,22 +66,8 @@ class TMainForm : public TRegistryForm
 	TComboBox *mComportCB;
 	TButton *mConnectZebraBtn;
 	TButton *mSendBtn1;
-	TButton *mStartStopBtn;
-	TGroupBox *GroupBox3;
 	TPanel *mTopPanel;
-	TButton *mResetBtn;
-	TGroupBox *HandwheelGB;
-	TPie *mCrankPositionPie;
-	TLabel *mRetractLbl;
-	TLabel *Label2;
-	TLabel *Label3;
-	TLabel *Label4;
 	TPanel *mMiddleLeftPanel;
-	TGroupBox *GroupBox1;
-	TPanel *Panel2;
-	TGroupBox *GroupBox2;
-	TFloatLabeledEdit *FloatLabeledEdit1;
-	TFloatLabeledEdit *FloatLabeledEdit2;
 	TSTDStringEdit *mCheckSumEdit;
 	TSTDStringEdit *mRawCMDE;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
@@ -96,21 +82,17 @@ class TMainForm : public TRegistryForm
     void __fastcall LogLevelCBChange(TObject *Sender);
 	void __fastcall mConnectZebraBtnClick(TObject *Sender);
 	void __fastcall mSendBtn1Click(TObject *Sender);
-	void __fastcall mStartStopBtnClick(TObject *Sender);
 	void __fastcall OpenAboutFormAExecute(TObject *Sender);
 	void __fastcall mRawCMDEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
-
 
 
     private:
         bool                                            gCanClose;
         TApplicationProperties                          mAppProperties;
-
-
 		ZebraConnection	  								mZebra;
 
         												//!Consume Zebra messages
-//        ZebraMessageConsumer		  						mZebraConsumer;
+        ZebraMessageConsumer		  					mZebraConsumer;
 
         int												getCOMPortNumber();
         void __fastcall                                 logMsg();
