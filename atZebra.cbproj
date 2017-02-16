@@ -4,7 +4,7 @@
         <ProjectVersion>14.4</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
         <AppType>Application</AppType>
-        <MainSource>zebra.cpp</MainSource>
+        <MainSource>atZebra.cpp</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
@@ -143,16 +143,28 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
     </PropertyGroup>
     <ItemGroup>
+        <CppCompile Include="atZebra.cpp">
+            <BuildOrder>0</BuildOrder>
+        </CppCompile>
         <CppCompile Include="auto_link.cpp">
             <BuildOrder>8</BuildOrder>
         </CppCompile>
-        <CppCompile Include="source\atUC7MessageConsumer.cpp">
-            <BuildOrder>9</BuildOrder>
+        <CppCompile Include="source\atZebra.cpp">
+            <Suffix>_0</Suffix>
+            <BuildOrder>12</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="source\atZebraMessage.cpp">
+            <DependentOn>source\atZebraMessage.h</DependentOn>
+            <BuildOrder>10</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="source\atZebraMessageConsumer.cpp">
+            <DependentOn>source\atZebraMessageConsumer.h</DependentOn>
+            <BuildOrder>11</BuildOrder>
         </CppCompile>
         <CppCompile Include="UI\ClosingAppLogic.cpp">
             <BuildOrder>19</BuildOrder>
         </CppCompile>
-        <CppCompile Include="UI\Forms\TAboutUC7Form.cpp">
+        <CppCompile Include="UI\Forms\TAboutZebraForm.cpp">
             <BuildOrder>9</BuildOrder>
         </CppCompile>
         <CppCompile Include="UI\InitializingAppLogic.cpp">
@@ -172,9 +184,6 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <FormType>dfm</FormType>
             <DependentOn>UI\TMainForm.h</DependentOn>
             <BuildOrder>2</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="zebra.cpp">
-            <BuildOrder>0</BuildOrder>
         </CppCompile>
         <CppCompile Include="ZebraConnection.cpp">
             <BuildOrder>10</BuildOrder>
@@ -198,7 +207,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <BorlandProject>
             <CPlusPlusBuilder.Personality>
                 <Source>
-                    <Source Name="MainSource">zebra.cpp</Source>
+                    <Source Name="MainSource">atZebra.cpp</Source>
                 </Source>
                 <VersionInfo>
                     <VersionInfo Name="IncludeVerInfo">False</VersionInfo>

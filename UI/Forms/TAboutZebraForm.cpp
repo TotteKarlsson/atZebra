@@ -1,6 +1,6 @@
 #include <vcl.h>
 #pragma hdrstop
-#include "TAboutUC7Form.h"
+#include "TAboutZebraForm.h"
 #include "mtkApplicationInfo.h"
 #include "mtkLogger.h"
 #include <sstream>
@@ -9,17 +9,17 @@
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 
-TAboutUC7Form *AboutUC7Form;
+TAboutZebraForm *AboutZebraForm;
 using namespace std;
 using namespace mtk;
 
 //---------------------------------------------------------------------------
-__fastcall TAboutUC7Form::TAboutUC7Form(TComponent* Owner)
+__fastcall TAboutZebraForm::TAboutZebraForm(TComponent* Owner)
 	: TForm(Owner)
 {}
 
 //---------------------------------------------------------------------------
-void __fastcall TAboutUC7Form::FormShow(TObject *Sender)
+void __fastcall TAboutZebraForm::FormShow(TObject *Sender)
 {
     stringstream ss;
     mtkApplicationInfo appInfo(Application);
@@ -33,7 +33,7 @@ void __fastcall TAboutUC7Form::FormShow(TObject *Sender)
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TAboutUC7Form::FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
+void __fastcall TAboutZebraForm::FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
 {
 	if(Key == vkEscape)
     {

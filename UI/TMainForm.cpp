@@ -73,14 +73,14 @@ int	TMainForm::getCOMPortNumber()
 void __fastcall TMainForm::mSendBtn1Click(TObject *Sender)
 {
 	string msg = mRawCMDE->getValue();
-    UC7Message uc7Msg(msg, false);
+    ZebraMessage uc7Msg(msg, false);
     Log(lInfo) << "Sending message: " << uc7Msg.getFullMessage();
-	mUC7.sendRawMessage(uc7Msg.getFullMessage());
+	mZebra.sendRawMessage(uc7Msg.getFullMessage());
 }
 
-void __fastcall TMainForm::onConnectedToUC7()
+void __fastcall TMainForm::onConnectedToZebra()
 {
-    mConnectUC7Btn->Caption         = "Close";
+    mConnectZebraBtn->Caption         = "Close";
 	mRawCMDE->Enabled 		        = true;
 	mSendBtn1->Enabled 		        = true;
     mStartStopBtn->Enabled 	        = true;
@@ -90,9 +90,9 @@ void __fastcall TMainForm::onConnectedToUC7()
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TMainForm::onDisConnectedToUC7()
+void __fastcall TMainForm::onDisConnectedToZebra()
 {
-    mConnectUC7Btn->Caption         = "Open";
+    mConnectZebraBtn->Caption         = "Open";
 	mRawCMDE->Enabled 		        = false;
 	mSendBtn1->Enabled 		        = false;
     mStartStopBtn->Enabled 	        = false;
@@ -107,17 +107,17 @@ void __fastcall TMainForm::mStartStopBtnClick(TObject *Sender)
 	if(mStartStopBtn->Caption == "Start")
     {
     	Log(lInfo) << "Starting cutter";
-	    mUC7.startCutter();
+	    mZebra.startCutter();
 	}
     else
     {
 	   	Log(lInfo) << "Stopping cutter";
-	    mUC7.stopCutter();
+	    mZebra.stopCutter();
     }
 }
 
 
-bool TMainForm::handleUC7Message(const UC7Message& m)
+bool TMainForm::handleZebraMessage(const ZebraMessage& m)
 {
 	//Find out controller address from sender parameter
 	switch(toInt(m.sender()))
@@ -232,7 +232,7 @@ void __fastcall TMainForm::mRawCMDEKeyDown(TObject *Sender, WORD &Key, TShiftSta
 
 //  if(Key == VK_RETURN)
     {
-        UC7Message msg(mRawCMDE->getValue(), false);
+        ZebraMessage msg(mRawCMDE->getValue(), false);
         msg.calculateCheckSum();
         mCheckSumEdit->setValue(msg.checksum());
     }

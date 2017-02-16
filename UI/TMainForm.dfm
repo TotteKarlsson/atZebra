@@ -237,6 +237,8 @@ object MainForm: TMainForm
     Height = 41
     Align = alTop
     TabOrder = 3
+    ExplicitLeft = -1
+    ExplicitTop = -4
     object mComportCB: TComboBox
       Left = 8
       Top = 12
@@ -267,14 +269,14 @@ object MainForm: TMainForm
         'COM19'
         'COM20')
     end
-    object mConnectUC7Btn: TButton
+    object mConnectZebraBtn: TButton
       Left = 165
       Top = 10
       Width = 50
       Height = 25
       Caption = 'Open'
       TabOrder = 1
-      OnClick = mConnectUC7BtnClick
+      OnClick = mConnectZebraBtnClick
     end
     object mSendBtn1: TButton
       Left = 396

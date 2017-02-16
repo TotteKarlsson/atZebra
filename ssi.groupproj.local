@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<BorlandProject>
-	<Transactions>
-    <Transaction>2017/02/16 12:37:51.000.671,C:\Users\matsk\Documents\RAD Studio\Projects\ProjectGroup1.groupproj=P:\barcodereader\SerialAPP\ssi.groupproj</Transaction>
-  </Transactions>
-	<Default.Personality>
-		<Projects ActiveProject="P:\barcodereader\SerialAPP\atZebra.cbproj"/>
-	</Default.Personality>
-</BorlandProject>

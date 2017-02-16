@@ -4,20 +4,20 @@
 #include "Poco/Mutex.h"
 #include "mtkLogger.h"
 #include "mtkUtils.h"
-#include "atUC7.h"
-#include "atUC7ApplicationMessages.h"
-#include "atUC7DataStructures.h"
+#include "atZebra.h"
+#include "atZebraApplicationMessages.h"
+#include "atZebraDataStructures.h"
 //---------------------------------------------------------------------------
 
 using Poco::Mutex;
 using namespace mtk;
 
 //----------------------------------------------------------------
-ZebraMessageConsumer::ZebraMessageConsumer(UC7& messageContainer,  HWND__ *h, const string& threadName)
+ZebraMessageConsumer::ZebraMessageConsumer(Zebra& messageContainer,  HWND__ *h, const string& threadName)
 :
 mtk::Thread(threadName),
 mAllowProcessing(true),
-mUC7(messageContainer),
+mZebra(messageContainer),
 mProcessedCount(0),
 mNotifyUI(NULL),
 mProcessTimeDelay(1),
@@ -67,7 +67,7 @@ void ZebraMessageConsumer::stop()
 	mtk::Thread::stop();
 
 	//If thread is waiting.. get it out of wait state
-	mUC7.mNewMessageCondition.signal();
+	mZebra.mNewMessageCondition.signal();
 }
 
 void ZebraMessageConsumer::run()
@@ -81,19 +81,19 @@ void ZebraMessageConsumer::worker()
 	while(mIsTimeToDie == false)
 	{
 		{
-			Poco::ScopedLock<Poco::Mutex> lock(mUC7.mBufferMutex);
-			if(mUC7.mIncomingMessagesBuffer.size() == 0)
+			Poco::ScopedLock<Poco::Mutex> lock(mZebra.mBufferMutex);
+			if(mZebra.mIncomingMessagesBuffer.size() == 0)
 			{
-				Log(lDebug3) << "Waiting for UC7 message.";
-				mUC7.mNewMessageCondition.wait(mUC7.mBufferMutex);
+				Log(lDebug3) << "Waiting for Zebra message.";
+				mZebra.mNewMessageCondition.wait(mZebra.mBufferMutex);
 			}
 
-            while(mUC7.hasMessage() && mIsTimeToDie == false)
+            while(mZebra.hasMessage() && mIsTimeToDie == false)
             {
-				UC7Message* msg = new UC7Message;
-	           	(*msg) = mUC7.mIncomingMessagesBuffer.front();
+				ZebraMessage* msg = new ZebraMessage;
+	           	(*msg) = mZebra.mIncomingMessagesBuffer.front();
 
-                mUC7.mIncomingMessagesBuffer.pop_front();
+                mZebra.mIncomingMessagesBuffer.pop_front();
                 if(!msg->check())
                 {
                 	Log(lError) << "Corrupted message";
@@ -114,7 +114,7 @@ void ZebraMessageConsumer::worker()
 		}//scoped lock
 	}
 
-    Log(lInfo) << "UC7 Message Processor finished";
+    Log(lInfo) << "Zebra Message Processor finished";
 	mIsFinished = true;
 	mIsRunning = false;
 }

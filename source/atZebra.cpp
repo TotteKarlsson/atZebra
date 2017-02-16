@@ -1,61 +1,61 @@
 #pragma hdrstop
-#include "ZebraConnection.h"
+#include "atZebra.h"
 #include "mtkIniFile.h"
 #include "mtkLogger.h"
 //---------------------------------------------------------------------------
 
 using namespace mtk;
 
-ZebraConnection::ZebraConnection()
+Zebra::Zebra()
 :
-	mINIFileSection("UC7"),
+	mINIFileSection("Zebra"),
     mCOMPort(-1),
     mSerial(-1, 19200, '!', '\r')
 {
 	mSerial.assignMessageReceivedCallBack(onSerialMessage);
 }
 
-ZebraConnection::~ZebraConnection()
+Zebra::~Zebra()
 {
 	disConnect();
 }
 
-bool ZebraConnection::connect(int com)
+bool Zebra::connect(int com)
 {
-	Log(lInfo) << "Connecting UC7 client on COM"<<com;
-    return mSerial.connect(com, 9600);
+	Log(lInfo) << "Connecting Zebra client on COM"<<com;
+    return mSerial.connect(com, 19200);
 }
 
-bool ZebraConnection::disConnect()
+bool Zebra::disConnect()
 {
 	return mSerial.disConnect();
 }
 
-bool ZebraConnection::isConnected()
+bool Zebra::isConnected()
 {
 	return mSerial.isConnected();
 }
 
 //This returns the checksum as a HEX number
-int ZebraConnection::calculateCheckSum(const string& cmd)
+int Zebra::calculateCheckSum(const string& cmd)
 {
 	int cs = 0xFF;
 	return cs;
 }
 
-bool ZebraConnection::getVersion()
+bool Zebra::getVersion()
 {
 	return "";
 }
 
-bool ZebraConnection::hasMessage()
+bool Zebra::hasMessage()
 {
 	return mIncomingMessagesBuffer.size() ? true : false;
 }
 
-void ZebraConnection::onSerialMessage(const string& msg)
+void Zebra::onSerialMessage(const string& msg)
 {
-	Log(lDebug4) << "Decoding UC7 message: "<<msg;
+	Log(lDebug4) << "Decoding Zebra message: "<<msg;
     ZebraMessage cmd(msg, true);
     if(cmd.check())
     {
@@ -81,28 +81,28 @@ void ZebraConnection::onSerialMessage(const string& msg)
     }
 }
 
-bool ZebraConnection::sendRawMessage(const string& msg)
+bool Zebra::sendRawMessage(const string& msg)
 {
 	Log(lInfo) << "Sending raw message: "<<msg;
 	return mSerial.send(msg);
 }
 
-bool ZebraConnection::startCutter()
+bool Zebra::startCutter()
 {
 	return sendZebraMessage(CUTTING_MOTOR_CONTROL, "01");
 }
 
-bool ZebraConnection::stopCutter()
+bool Zebra::stopCutter()
 {
 	return sendZebraMessage(CUTTING_MOTOR_CONTROL, "00");
 }
 
-bool ZebraConnection::getCutterStatus()
+bool Zebra::getCutterStatus()
 {
 	return sendZebraMessage(CUTTING_MOTOR_CONTROL, "FF");
 }
 
-bool ZebraConnection::sendZebraMessage(const ZebraMessageName& msgName, const string& data1, const string& data2)
+bool Zebra::sendZebraMessage(const ZebraMessageName& msgName, const string& data1, const string& data2)
 {
 	stringstream cmd;
 

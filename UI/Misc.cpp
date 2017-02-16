@@ -21,7 +21,7 @@ void __fastcall TMainForm::FormKeyDown(TObject *Sender, WORD &Key, TShiftState S
 
 void __fastcall TMainForm::OpenAboutFormAExecute(TObject *Sender)
 {
-	TAboutUC7Form* f = new TAboutUC7Form(this);
+	TAboutZebraForm* f = new TAboutZebraForm(this);
     f->ShowModal();
     delete f;
 }
@@ -33,7 +33,7 @@ void __fastcall TMainForm::ClearMemoAExecute(TObject *Sender)
 
 void TMainForm::setupWindowTitle()
 {
-	string title = createWindowTitle("atUC7", Application);
+	string title = createWindowTitle("atZebra", Application);
 	this->Caption = vclstr(title);
 }
 
@@ -85,13 +85,13 @@ void __fastcall TMainForm::LogLevelCBChange(TObject *Sender)
     gLogger.setLogLevel(mLogLevel);
 }
 
-void __fastcall TMainForm::mConnectUC7BtnClick(TObject *Sender)
+void __fastcall TMainForm::mConnectZebraBtnClick(TObject *Sender)
 {
-	if(mConnectUC7Btn->Caption == "Open")
+	if(mConnectZebraBtn->Caption == "Open")
     {
-        if(mUC7.connect(getCOMPortNumber()))
+        if(mZebra.connect(getCOMPortNumber()))
         {
-            Log(lInfo) << "Connected to a UC7 device";
+            Log(lInfo) << "Connected to a Zebra device";
         }
         else
         {
@@ -100,19 +100,19 @@ void __fastcall TMainForm::mConnectUC7BtnClick(TObject *Sender)
     }
     else
     {
-        if(!mUC7.disConnect())
+        if(!mZebra.disConnect())
         {
 			Log(lError) << "Failed to close serial port";
         }
     }
 
-    if(mUC7.isConnected())
+    if(mZebra.isConnected())
     {
-	    onConnectedToUC7();
+	    onConnectedToZebra();
     }
     else
     {
-		onDisConnectedToUC7();
+		onDisConnectedToZebra();
     }
 }
 
@@ -145,15 +145,15 @@ void __fastcall TMainForm::AppInBox(ATWindowStructMessage& msg)
 
         switch(aMsg)
         {
-            case atUC7SplashWasClosed:
+            case atZebraSplashWasClosed:
                 Log(lDebug2) << "Splash form sent message that it was closed";
             break;
 
-			case atUC7Message:
+			case atZebraMessage:
             {
-            	UC7Message* m = (UC7Message*) msg.lparam;
-                Log(lInfo) << "Handling UC7 message:" << m->getMessageNameAsString();
-                handleUC7Message(*m);
+            	ZebraMessage* m = (ZebraMessage*) msg.lparam;
+                Log(lInfo) << "Handling Zebra message:" << m->getMessageNameAsString();
+                handleZebraMessage(*m);
                 delete m;
             }
             default:

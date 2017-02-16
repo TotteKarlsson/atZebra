@@ -94,7 +94,7 @@ class TMainForm : public TRegistryForm
     void __fastcall ShutDownTimerTimer(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
     void __fastcall LogLevelCBChange(TObject *Sender);
-	void __fastcall mConnectUC7BtnClick(TObject *Sender);
+	void __fastcall mConnectZebraBtnClick(TObject *Sender);
 	void __fastcall mSendBtn1Click(TObject *Sender);
 	void __fastcall mStartStopBtnClick(TObject *Sender);
 	void __fastcall OpenAboutFormAExecute(TObject *Sender);

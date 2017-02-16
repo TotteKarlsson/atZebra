@@ -1,8 +1,8 @@
-object AboutUC7Form: TAboutUC7Form
+object AboutZebraForm: TAboutZebraForm
   Left = 0
   Top = 0
   BorderStyle = bsDialog
-  Caption = 'About atUC7'
+  Caption = 'About atZebra'
   ClientHeight = 631
   ClientWidth = 737
   Color = clBtnFace
@@ -7591,7 +7591,7 @@ object AboutUC7Form: TAboutUC7Form
       Top = 16
       Width = 114
       Height = 52
-      Caption = 'atUC7'
+      Caption = 'atZebra'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -43
