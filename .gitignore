@@ -1,0 +1,14 @@
+/Win32
+*.obj
+*.local
+*.~py
+*.dsk
+*.#00
+*.ilc
+*.ild
+*.ilf
+*.ils
+Win32
+__history
+/ThirdParties/*.ZIP
+/PythonSource/*.pyc
