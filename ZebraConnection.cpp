@@ -8,7 +8,7 @@ using namespace mtk;
 
 ZebraConnection::ZebraConnection()
 :
-	mINIFileSection("UC7"),
+	mINIFileSection("Zebra"),
     mCOMPort(-1),
     mSerial(-1, 19200, '!', '\r')
 {
@@ -22,7 +22,7 @@ ZebraConnection::~ZebraConnection()
 
 bool ZebraConnection::connect(int com)
 {
-	Log(lInfo) << "Connecting UC7 client on COM"<<com;
+	Log(lInfo) << "Connecting Zebra client on COM"<<com;
     return mSerial.connect(com, 9600);
 }
 
@@ -55,7 +55,7 @@ bool ZebraConnection::hasMessage()
 
 void ZebraConnection::onSerialMessage(const string& msg)
 {
-	Log(lDebug4) << "Decoding UC7 message: "<<msg;
+	Log(lDebug4) << "Decoding Zebra message: "<<msg;
     ZebraMessage cmd(msg, true);
     if(cmd.check())
     {

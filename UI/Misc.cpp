@@ -2,7 +2,7 @@
 #include "TMainForm.h"
 #include "mtkVCLUtils.h"
 #include "mtkLogger.h"
-#include "TAboutUC7Form.h"
+#include "TAboutZebraForm.h"
 #pragma package(smart_init)
 using Poco::DateTimeFormatter;
 

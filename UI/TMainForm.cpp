@@ -30,12 +30,12 @@ TMainForm *MainForm;
 using namespace mtk;
 using namespace ab;
 
-extern string gLogFileName;
-extern string gApplicationRegistryRoot;
-extern string gDefaultAppTheme;
-extern string gFullDateTimeFormat;
-extern bool gIsDevelopmentRelease;
-extern string gCommonAppDataLocation;
+extern string 	gLogFileName;
+extern string 	gApplicationRegistryRoot;
+extern string 	gDefaultAppTheme;
+extern string 	gFullDateTimeFormat;
+extern bool 	gIsDevelopmentRelease;
+extern string 	gCommonAppDataLocation;
 
 //---------------------------------------------------------------------------
 __fastcall TMainForm::TMainForm(TComponent* Owner)
@@ -49,12 +49,12 @@ __fastcall TMainForm::TMainForm(TComponent* Owner)
     gCanClose(true),
     mLogFileReader(joinPath(gCommonAppDataLocation, gLogFileName), &logMsg),
     mCOMPort(0)//,
-//    mUC7Consumer(mUC7, Handle)
+//    mZebraConsumer(mZebra, Handle)
 {
     TMemoLogger::mMemoIsEnabled = false;
     setupIniFile();
     setupAndReadIniParameters();
-//    mUC7Consumer.start();
+//    mZebraConsumer.start();
 }
 
 //This one is called from the reader thread

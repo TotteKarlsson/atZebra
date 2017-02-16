@@ -18,19 +18,20 @@ USEFORM("UI\TMainForm.cpp", MainForm);
 using namespace mtk;
 using std::string;
 
+extern string	    gAppName				    = "atZebra";
 extern HWND         gOtherAppWindow             = NULL;
 extern bool 		gAppIsStartingUp 			= true;
-extern string       gApplicationRegistryRoot    = "\\Software\\Allen Institute\\atUC7";
+extern string       gApplicationRegistryRoot    = joinPath("\\Software\\Allen Institute", gAppName);
 extern string       gDefaultAppTheme            = "Iceberg Classico";
-extern string       gAppMutexName           	= "UC7AppMutex";
-extern string       gRestartMutexName           = "UC7RestartMutex";
+extern string       gAppMutexName           	= gAppName + "AppMutex";
+extern string       gRestartMutexName           = gAppName + "RestartMutex";
 extern string       gFullDateTimeFormat         = "%Y-%m-%dT%H:%M:%S";
 extern string       gDateFormat                 = "%Y-%m-%d";
 extern string       gTimeFormat                 = "%H:%M:%S";
 
-extern string       gCommonAppDataLocation      = ""; //Filled out later
+extern string       gCommonAppDataLocation      = joinPath(getSpecialFolder(CSIDL_LOCAL_APPDATA), gAppName);
 extern string       gLogFileLocation            = "";
-extern string       gLogFileName                = "atUC7.log";
+extern string       gLogFileName                = gAppName + ".log";
 //extern bool         gIsDevelopmentRelease       = true;
 //extern bool         gHideSplash                 = true;
 //extern TSplashForm* gSplashForm                 = NULL;
@@ -75,7 +76,6 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
         Log(lInfo) << "The Logfile was opened..";
 
         //Setup globals
-        gCommonAppDataLocation = joinPath(getSpecialFolder(CSIDL_LOCAL_APPDATA), "atUC7");
         if(!folderExists(gCommonAppDataLocation))
         {
             Log(lError) << "The local app data folder("<<gCommonAppDataLocation<<") don't exists! Catastrophe..";
@@ -85,7 +85,7 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
         Application->MainFormOnTaskBar = true;
 
 		TStyleManager::TrySetStyle(gDefaultAppTheme.c_str());
-		Application->Title = "atUC7";
+		Application->Title = vclstr(gAppName);
         Application->ProcessMessages();
 		Application->CreateForm(__classid(TMainForm), &MainForm);
 		Application->Run();
@@ -119,13 +119,12 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 void setupLogging()
 {
 	//Get Application folder
-	string fldr =  joinPath(getSpecialFolder(CSIDL_LOCAL_APPDATA), "atUC7");
-	if(!folderExists(fldr))
+	if(!folderExists(gCommonAppDataLocation))
 	{
-		createFolder(fldr);
+		createFolder(gCommonAppDataLocation);
 	}
 
-	gLogFileLocation = fldr;
+	gLogFileLocation = gCommonAppDataLocation;
 	string fullLogFileName(joinPath(gLogFileLocation, gLogFileName));
 	clearFile(fullLogFileName);
 	mtk::gLogger.logToFile(fullLogFileName);
