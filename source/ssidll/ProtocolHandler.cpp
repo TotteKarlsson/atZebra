@@ -24,7 +24,9 @@
 
 /****************************************************************************/
 /*	Include Files ************************************************************/
-#include "stdafx.h"
+//#include "stdafx.h"
+
+
 #include "ssidll.h"
 #include "CommThreads.h"
 #include "ProtocolHandler.h"
@@ -33,7 +35,7 @@
 /****************************************************************************/
 /*	Defines, typedefs, etc. *************************************************/
 
-// defines for the SSIMESSAGE source 
+// defines for the SSIMESSAGE source
 #define SSI_SOURCE_HOST 0x04
 #define SSI_SOURCE_DECODER 0x00
 
@@ -89,6 +91,7 @@ typedef	struct thread_array_tag{
 		UINT *pPacketTimerID;
 		int hWnd;
 	}thread_array_struct;
+
 static thread_array_struct ThreadArray[MAX_COM_PORTS] = {0};
 
 

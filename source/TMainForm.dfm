@@ -56,15 +56,6 @@ object MainForm: TMainForm
         TabOrder = 0
         OnClick = Button2Click
       end
-      object Button3: TButton
-        Left = 24
-        Top = 32
-        Width = 75
-        Height = 25
-        Caption = 'Connect'
-        TabOrder = 1
-        OnClick = Button3Click
-      end
     end
   end
   object SB: TStatusBar

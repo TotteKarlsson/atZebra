@@ -317,7 +317,7 @@ BOOL CComPort::Connect()
     //
     // open communication port handle
     //
-    COMDEV( PortInfo ) = CreateFile( commport,  
+    COMDEV( PortInfo ) = CreateFile( "\\\\.\\COM17", //commport,
                                       GENERIC_READ | GENERIC_WRITE, 
                                       0, 
                                       0, 

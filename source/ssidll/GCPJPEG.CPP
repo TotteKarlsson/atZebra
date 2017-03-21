@@ -24,7 +24,8 @@
 
 
 //---------------------------------------------------------------------------
-#include "stdafx.h"
+//#include "stdafx.h"
+#include <windows.h>
 #include "gcpjpeg.h"
 
 

@@ -46,7 +46,9 @@
 
 /****************************************************************************/
 /*	Include Files ************************************************************/
-#include "stdafx.h"
+//#include "stdafx.h"
+#define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
+#include <windows.h>
 #include "ssidll.h"
 #include "CommThreads.h" 
 #include "gcpjpeg.h"

@@ -44,7 +44,7 @@ __fastcall TMainForm::TMainForm(TComponent* Owner)
     mLogLevel(lAny),
     gCanClose(true),
     mLogFileReader(joinPath(gCommonAppDataLocation, gLogFileName), &logMsg),
-    mCOMPort(0)
+    mCOMPort(17)
 {
     TMemoLogger::mMemoIsEnabled = false;
     setupIniFile();
@@ -55,6 +55,28 @@ __fastcall TMainForm::TMainForm(TComponent* Owner)
 int	TMainForm::getCOMPortNumber()
 {
 	return mComportCB->ItemIndex + 1;
+}
+
+void __fastcall TMainForm::mConnectZebraBtnClick(TObject *Sender)
+{
+	if(mConnectZebraBtn->Caption == "Open")
+    {
+        int status = SSIConnect(this->Handle, 9600, mCOMPort);
+        Log(lError) << "Connect status: "<<status;
+
+    }
+    else
+    {
+    }
+
+//    if(mZebra.isConnected())
+//    {
+//	    onConnectedToZebra();
+//    }
+//    else
+//    {
+//		onDisConnectedToZebra();
+//    }
 }
 
 void __fastcall TMainForm::onConnectedToZebra()
@@ -72,13 +94,8 @@ void __fastcall TMainForm::onDisConnectedToZebra()
 //---------------------------------------------------------------------------
 void __fastcall TMainForm::Button2Click(TObject *Sender)
 {
-	int status = SoundBeeper(1, ONESHORTHI);
+	int status = SoundBeeper(17, ONESHORTHI);
+    Log(lError) << "Beep status: "<<status;
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TMainForm::Button3Click(TObject *Sender)
-{
-    int status = SSIConnect(this->Handle, 19200, 1);
-}
-
-

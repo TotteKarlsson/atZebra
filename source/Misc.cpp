@@ -91,25 +91,6 @@ void __fastcall TMainForm::LogLevelCBChange(TObject *Sender)
     gLogger.setLogLevel(mLogLevel);
 }
 
-void __fastcall TMainForm::mConnectZebraBtnClick(TObject *Sender)
-{
-	if(mConnectZebraBtn->Caption == "Open")
-    {
-    }
-    else
-    {
-    }
-
-//    if(mZebra.isConnected())
-//    {
-//	    onConnectedToZebra();
-//    }
-//    else
-//    {
-//		onDisConnectedToZebra();
-//    }
-}
-
 BOOL CALLBACK FindOtherWindow(HWND hwnd, LPARAM lParam)
 {
 	static TCHAR buffer[50];

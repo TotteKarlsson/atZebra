@@ -23,10 +23,13 @@
 
 /****************************************************************************/
 /*	Include Files ************************************************************/
-#include "stdafx.h"
+//#include "stdafx.h"
+
+// Insert your headers here
+#define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
+#include <windows.h>
 #include "ssidll.h"
 #include "comPort.h"
-
 
 /****************************************************************************/
 /*	Local Variables *********************************************************/

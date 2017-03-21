@@ -160,9 +160,6 @@
         <CppCompile Include="SSIDLL.CPP">
             <BuildOrder>2</BuildOrder>
         </CppCompile>
-        <CppCompile Include="StdAfx.cpp">
-            <BuildOrder>11</BuildOrder>
-        </CppCompile>
         <CppCompile Include="WRITER.CPP">
             <BuildOrder>5</BuildOrder>
         </CppCompile>

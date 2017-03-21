@@ -131,7 +131,8 @@
 
 /****************************************************************************/
 /*	Defines, typedefs, etc. *************************************************/
-#define MAX_COM_PORTS 16
+#define MAX_COM_PORTS 99
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 //	Library Error reporting 
@@ -244,7 +245,8 @@
 /*	Extern Function Prototypes **********************************************/
 
 
-
+#define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
+#include <windows.h>
 
 SSIDLL_API int __stdcall SSIConnect(HWND hwnd, long Baud, int Port);
 SSIDLL_API int __stdcall SSIDisconnect(HWND hwnd, int nComPort);
