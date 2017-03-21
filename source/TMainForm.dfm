@@ -174,36 +174,6 @@ object MainForm: TMainForm
       TabOrder = 1
       OnClick = mConnectZebraBtnClick
     end
-    object mSendBtn1: TButton
-      Left = 396
-      Top = 10
-      Width = 50
-      Height = 25
-      Caption = '->'
-      Enabled = False
-      TabOrder = 2
-      OnClick = mSendBtn1Click
-    end
-    object mCheckSumEdit: TSTDStringEdit
-      Left = 504
-      Top = 10
-      Width = 49
-      Height = 21
-      TabOrder = 4
-      Text = 'CC'
-      Value = 'CC'
-    end
-    object mRawCMDE: TSTDStringEdit
-      Left = 245
-      Top = 12
-      Width = 145
-      Height = 21
-      Enabled = False
-      TabOrder = 3
-      Text = '81F0F8'
-      OnKeyDown = mRawCMDEKeyDown
-      Value = '81F0F8'
-    end
   end
   object ActionList1: TActionList
     Left = 584

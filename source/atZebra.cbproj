@@ -49,13 +49,13 @@
         <VerInfo_Keys>CompanyName=Dune Scientific, LLC;FileDescription=;FileVersion=0.5.0.0;InternalName=;LegalCopyright=;LegalTrademarks=Dune Scientific, LLC;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>None</Manifest_File>
-        <VCL_Custom_Styles>&quot;Iceberg Classico|VCLSTYLE|$(PUBLIC)\Documents\RAD Studio\10.0\Styles\IcebergClassico.vsf&quot;</VCL_Custom_Styles>
+        <VCL_Custom_Styles>&quot;Auric|VCLSTYLE|$(PUBLIC)\Documents\RAD Studio\10.0\Styles\Auric.vsf&quot;;&quot;Iceberg Classico|VCLSTYLE|$(PUBLIC)\Documents\RAD Studio\10.0\Styles\IcebergClassico.vsf&quot;</VCL_Custom_Styles>
         <ProjectType>CppVCLApplication</ProjectType>
         <Icon_MainIcon>$(BDS)\bin\cbuilder_PROJECTICON.ico</Icon_MainIcon>
-        <ILINK_LibraryPath>P:\libs\dslib\VCL\Components\;P:\libs\atapi\source\UC7\;P:\libs\atapi\source\database\;source\;p:\libs\atapi\source\vcl\datamodules\;source\vcl\;UI\;UI\Forms\;..\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <ILINK_LibraryPath>..\Forms\;..\;P:\libs\dslib\VCL\Components\;P:\libs\atapi\source\UC7\;P:\libs\atapi\source\database\;source\;p:\libs\atapi\source\vcl\datamodules\;source\vcl\;Forms\;..\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
         <_TCHARMapping>wchar_t</_TCHARMapping>
-        <IncludePath>P:\libs\dslib\VCL\Components\;P:\libs\atapi\source\UC7\;P:\libs\atapi\source\database\;source\;p:\libs\atapi\source\vcl\datamodules\;source\vcl\;$(AT_ROOT)\source;$(AT_ROOT)\source\vcl;$(AT_ROOT)\source\vcl\datamodules\;UI\;UI\Forms\;..\;$(IncludePath)</IncludePath>
+        <IncludePath>..\Forms\;..\;P:\libs\dslib\VCL\Components\;P:\libs\atapi\source\UC7\;P:\libs\atapi\source\database\;source\;p:\libs\atapi\source\vcl\datamodules\;source\vcl\;$(AT_ROOT)\source;$(AT_ROOT)\source\vcl;$(AT_ROOT)\source\vcl\datamodules\;Forms\;..\;$(IncludePath)</IncludePath>
         <Multithreaded>true</Multithreaded>
         <AllPackageLibs>rtl.lib;vcl.lib;dbrtl.lib;dbexpress.lib;DbxCommonDriver.lib;dsnap.lib;DbxDevartSQLiteDriver170.lib;vcldb.lib;dbxcds.lib;VCLCommon.lib;vclactnband.lib;vclx.lib;vclimg.lib;CSKGenerator.lib;adortl.lib;DuneComponents.lib;bindengine.lib;bindcomp.lib;bindcompvcl.lib;TeeDB.lib;TeeUI.lib;Tee.lib;RaizeComponentsTrialVcl.lib;RaizeComponentsTrialVclDb.lib;HsBarcode1DRun.lib;DBXMySQLDriver.lib;HsBarcode2DRun.lib;atVCLCore.lib;bcbsmp.lib</AllPackageLibs>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
@@ -105,8 +105,7 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <PostBuildEvent><![CDATA[xcopy CHANGELOG.txt $(APP_RELEASES)\atZebra /y
-xcopy $(OUTPUTDIR)*.dll $(APP_RELEASES)\atZebra /y
+        <PostBuildEvent><![CDATA[xcopy $(OUTPUTDIR)*.dll $(APP_RELEASES)\atZebra /y
 xcopy $(OUTPUTDIR)*.ini $(APP_RELEASES)\atZebra /y
 xcopy $(OUTPUTDIR)$(OUTPUTFILENAME) $(APP_RELEASES)\atZebra /y
 xcopy p:\redist\atZebra\*.dll $(APP_RELEASES)\atZebra /y
@@ -114,7 +113,7 @@ xcopy p:\redist\atZebra\*.bpl $(APP_RELEASES)\atZebra /y
 xcopy p:\build\xe3_ide\bpl\atVCLCore.bpl $(APP_RELEASES)\atZebra /y
 xcopy p:\build\xe3_ide\bpl\Dune*.bpl $(APP_RELEASES)\atZebra /y
 xcopy p:\build\xe3_ide\bpl\VCLCommon*.bpl $(APP_RELEASES)\atZebra /y
-xcopy *.txt $(APP_RELEASES)\atZebra /y
+xcopy ..\*.txt $(APP_RELEASES)\atZebra /y
 xcopy $(OUTPUTDIR)atZebra.exe $(APP_RELEASES)\atZebra /y
 $(PostBuildEvent)]]></PostBuildEvent>
         <VerInfo_MinorVer>5</VerInfo_MinorVer>
@@ -126,12 +125,12 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <Debugger_DebugSourcePath>P:\libs\dslib\VCL\Common\;P:\libs\dslib\VCL\Components\;P:\libs\dslib\Common\;P:\libs\atapi\source\serial\;P:\libs\dslib\Common\IPC\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
         <BCC_PCHInject>pch.h</BCC_PCHInject>
         <BCC_PCHCache>true</BCC_PCHCache>
-        <Icon_MainIcon>UI\Resources\atDB.ico</Icon_MainIcon>
+        <Icon_MainIcon>Resources\atDB.ico</Icon_MainIcon>
         <VerInfo_PreRelease>true</VerInfo_PreRelease>
         <VerInfo_Debug>true</VerInfo_Debug>
         <FinalOutputDir>$(DEBUG_BUILD)\bin</FinalOutputDir>
         <ILINK_LibraryPath>$(DEBUG_BUILD)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-        <IncludePath>UI\Core;UI\Forms;UI\Frames;$(DEBUG_BUILD)\include;$(IncludePath)</IncludePath>
+        <IncludePath>Core;Forms;Frames;$(DEBUG_BUILD)\include;$(IncludePath)</IncludePath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <LinkPackageImports>rtl.bpi;vcl.bpi;dbrtl.bpi;dbexpress.bpi;DbxCommonDriver.bpi;dsnap.bpi;DbxDevartSQLiteDriver170.bpi;vcldb.bpi;dbxcds.bpi;VCLCommon.bpi;vclactnband.bpi;vclx.bpi;vclimg.bpi;CSKGenerator.bpi;adortl.bpi;DuneComponents.bpi;bindengine.bpi;bindcomp.bpi;bindcompvcl.bpi;TeeDB.bpi;TeeUI.bpi;Tee.bpi;RaizeComponentsTrialVcl.bpi;RaizeComponentsTrialVclDb.bpi;DBXMySQLDriver.bpi;bcbsmp.bpi</LinkPackageImports>
     </PropertyGroup>
@@ -146,46 +145,36 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <CppCompile Include="atZebra.cpp">
             <BuildOrder>0</BuildOrder>
         </CppCompile>
-        <CppCompile Include="auto_link.cpp">
-            <BuildOrder>8</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="source\atZebraConnection.cpp">
-            <DependentOn>source\atZebraConnection.h</DependentOn>
+        <CppCompile Include="atZebraConnection.cpp">
+            <DependentOn>atZebraConnection.h</DependentOn>
             <BuildOrder>11</BuildOrder>
         </CppCompile>
-        <CppCompile Include="source\atZebraMessage.cpp">
-            <DependentOn>source\atZebraMessage.h</DependentOn>
+        <CppCompile Include="atZebraMessage.cpp">
+            <DependentOn>atZebraMessage.h</DependentOn>
             <BuildOrder>10</BuildOrder>
         </CppCompile>
-        <CppCompile Include="source\atZebraMessageConsumer.cpp">
-            <DependentOn>source\atZebraMessageConsumer.h</DependentOn>
+        <CppCompile Include="atZebraMessageConsumer.cpp">
+            <DependentOn>atZebraMessageConsumer.h</DependentOn>
             <BuildOrder>11</BuildOrder>
         </CppCompile>
-        <CppCompile Include="UI\ClosingAppLogic.cpp">
-            <BuildOrder>19</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="UI\Forms\TAboutZebraForm.cpp">
+        <CppCompile Include="auto_link.cpp">
             <BuildOrder>9</BuildOrder>
         </CppCompile>
-        <CppCompile Include="UI\InitializingAppLogic.cpp">
-            <BuildOrder>20</BuildOrder>
+        <CppCompile Include="ClosingAppLogic.cpp">
+            <BuildOrder>11</BuildOrder>
         </CppCompile>
-        <CppCompile Include="UI\Misc.cpp">
-            <BuildOrder>22</BuildOrder>
+        <CppCompile Include="InitializingAppLogic.cpp">
+            <BuildOrder>12</BuildOrder>
         </CppCompile>
-        <CppCompile Include="UI\MiscDataBase.cpp">
-            <BuildOrder>17</BuildOrder>
+        <CppCompile Include="Misc.cpp">
+            <BuildOrder>13</BuildOrder>
         </CppCompile>
-        <CppCompile Include="UI\ThemesLogic.cpp">
-            <BuildOrder>27</BuildOrder>
+        <CppCompile Include="MiscDataBase.cpp">
+            <BuildOrder>14</BuildOrder>
         </CppCompile>
-        <CppCompile Include="UI\TMainForm.cpp">
-            <Form>MainForm</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>UI\TMainForm.h</DependentOn>
-            <BuildOrder>2</BuildOrder>
+        <CppCompile Include="TMainForm.cpp">
+            <BuildOrder>15</BuildOrder>
         </CppCompile>
-        <FormResources Include="UI\TMainForm.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -266,7 +255,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>xcopy CHANGELOG.txt $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy $(OUTPUTDIR)*.dll $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy $(OUTPUTDIR)*.ini $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy $(OUTPUTDIR)$(OUTPUTFILENAME) $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy p:\redist\atZebra\*.dll $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy p:\redist\atZebra\*.bpl $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy p:\build\xe3_ide\bpl\atVCLCore.bpl $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy p:\build\xe3_ide\bpl\Dune*.bpl $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy p:\build\xe3_ide\bpl\VCLCommon*.bpl $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy *.txt $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy $(OUTPUTDIR)atZebra.exe $(APP_RELEASES)\atZebra /y</PostBuildEvent>
+        <PostBuildEvent>xcopy $(OUTPUTDIR)*.dll $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy $(OUTPUTDIR)*.ini $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy $(OUTPUTDIR)$(OUTPUTFILENAME) $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy p:\redist\atZebra\*.dll $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy p:\redist\atZebra\*.bpl $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy p:\build\xe3_ide\bpl\atVCLCore.bpl $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy p:\build\xe3_ide\bpl\Dune*.bpl $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy p:\build\xe3_ide\bpl\VCLCommon*.bpl $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy ..\*.txt $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy $(OUTPUTDIR)atZebra.exe $(APP_RELEASES)\atZebra /y</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
 </Project>

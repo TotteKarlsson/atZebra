@@ -153,7 +153,6 @@ void __fastcall TMainForm::AppInBox(ATWindowStructMessage& msg)
             {
             	ZebraMessage* m = (ZebraMessage*) msg.lparam;
                 Log(lInfo) << "Handling Zebra message:" << m->getMessageNameAsString();
-                handleZebraMessage(*m);
                 delete m;
             }
             default:

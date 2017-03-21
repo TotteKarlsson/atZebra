@@ -6,7 +6,7 @@
         <Projects Include="source\ssidll\atZebraDLL.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="atZebra.cbproj">
+        <Projects Include="source\atZebra.cbproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -27,13 +27,13 @@
         <MSBuild Projects="source\ssidll\atZebraDLL.cbproj" Targets="Make"/>
     </Target>
     <Target Name="atZebra">
-        <MSBuild Projects="atZebra.cbproj"/>
+        <MSBuild Projects="source\atZebra.cbproj"/>
     </Target>
     <Target Name="atZebra:Clean">
-        <MSBuild Projects="atZebra.cbproj" Targets="Clean"/>
+        <MSBuild Projects="source\atZebra.cbproj" Targets="Clean"/>
     </Target>
     <Target Name="atZebra:Make">
-        <MSBuild Projects="atZebra.cbproj" Targets="Make"/>
+        <MSBuild Projects="source\atZebra.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
         <CallTarget Targets="atZebraDLL;atZebra"/>

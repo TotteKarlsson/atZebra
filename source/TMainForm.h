@@ -65,11 +65,8 @@ class TMainForm : public TRegistryForm
 	TComboBox *LogLevelCB;
 	TComboBox *mComportCB;
 	TButton *mConnectZebraBtn;
-	TButton *mSendBtn1;
 	TPanel *mTopPanel;
 	TPanel *mMiddleLeftPanel;
-	TSTDStringEdit *mCheckSumEdit;
-	TSTDStringEdit *mRawCMDE;
 	TButton *Button2;
 	TButton *Button3;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
@@ -78,17 +75,13 @@ class TMainForm : public TRegistryForm
     void __fastcall ClearMemoAExecute(TObject *Sender);
     void __fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
     void __fastcall FormShow(TObject *Sender);
-    void __fastcall ThemesMenuClick(TObject *Sender);
     void __fastcall ShutDownTimerTimer(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
     void __fastcall LogLevelCBChange(TObject *Sender);
 	void __fastcall mConnectZebraBtnClick(TObject *Sender);
-	void __fastcall mSendBtn1Click(TObject *Sender);
 	void __fastcall OpenAboutFormAExecute(TObject *Sender);
-	void __fastcall mRawCMDEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
 	void __fastcall Button2Click(TObject *Sender);
 	void __fastcall Button3Click(TObject *Sender);
-
 
     private:
         bool                                            gCanClose;
@@ -101,27 +94,21 @@ class TMainForm : public TRegistryForm
         int												getCOMPortNumber();
         void __fastcall                                 logMsg();
 		LogFileReader                                   mLogFileReader;
-		bool                                            mIsStyleMenuPopulated;
 		void                                            setupWindowTitle();
 		void                                            updateWindowTitle();
-
 
                                                         //INI Parameters...
         IniFileProperties	      	                    mGeneralProperties;
         mtk::Property<int>	                            mBottomPanelHeight;
 		mtk::Property<mtk::LogLevel>	                mLogLevel;
 		mtk::Property<int>	                			mCOMPort;
-        TRegistryProperties   	  	                    mSplashProperties;
-        mtk::Property<bool>                             mShowSplashOnStartup;
 
-        void        __fastcall                          PopulateStyleMenu();
         bool                                            setupAndReadIniParameters();
         void                                            setupIniFile();
 
 		void __fastcall 								onConnectedToZebra();
         void __fastcall 								onDisConnectedToZebra();
 		void __fastcall                                 AppInBox(ATWindowStructMessage& Msg);
-        bool											handleZebraMessage(const ZebraMessage& m);
 
     public:
                     __fastcall                          TMainForm(TComponent* Owner);

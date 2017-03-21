@@ -64,7 +64,5 @@ void __fastcall TMainForm::FormClose(TObject *Sender, TCloseAction &Action)
 	//Write to file
 	mIniFileC->save();
 
-	//Registry settings
-	mSplashProperties.write();
 }
 
