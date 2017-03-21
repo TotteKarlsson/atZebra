@@ -3,6 +3,12 @@
         <ProjectGuid>{BA9EFD34-9FAA-4B2C-822F-414E7A91B7E0}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
+        <Projects Include="P:\libs\dslib\Common\mtkCommon.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="P:\libs\dslib\VCL\Components\DuneComponents.cbproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="P:\libs\atapi\source\atCore.cbproj">
             <Dependencies/>
         </Projects>
@@ -20,6 +26,24 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
+    <Target Name="mtkCommon">
+        <MSBuild Projects="P:\libs\dslib\Common\mtkCommon.cbproj"/>
+    </Target>
+    <Target Name="mtkCommon:Clean">
+        <MSBuild Projects="P:\libs\dslib\Common\mtkCommon.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="mtkCommon:Make">
+        <MSBuild Projects="P:\libs\dslib\Common\mtkCommon.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="DuneComponents">
+        <MSBuild Projects="P:\libs\dslib\VCL\Components\DuneComponents.cbproj"/>
+    </Target>
+    <Target Name="DuneComponents:Clean">
+        <MSBuild Projects="P:\libs\dslib\VCL\Components\DuneComponents.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DuneComponents:Make">
+        <MSBuild Projects="P:\libs\dslib\VCL\Components\DuneComponents.cbproj" Targets="Make"/>
+    </Target>
     <Target Name="atCore">
         <MSBuild Projects="P:\libs\atapi\source\atCore.cbproj"/>
     </Target>
@@ -48,13 +72,13 @@
         <MSBuild Projects="atZebra.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="atCore;atVCLCore;atZebra"/>
+        <CallTarget Targets="mtkCommon;DuneComponents;atCore;atVCLCore;atZebra"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="atCore:Clean;atVCLCore:Clean;atZebra:Clean"/>
+        <CallTarget Targets="mtkCommon:Clean;DuneComponents:Clean;atCore:Clean;atVCLCore:Clean;atZebra:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="atCore:Make;atVCLCore:Make;atZebra:Make"/>
+        <CallTarget Targets="mtkCommon:Make;DuneComponents:Make;atCore:Make;atVCLCore:Make;atZebra:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

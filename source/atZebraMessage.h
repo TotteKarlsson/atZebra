@@ -1,30 +1,13 @@
 #ifndef atZebraMessageH
 #define atZebraMessageH
 #include "atABObject.h"
+#include <vector>
 //---------------------------------------------------------------------------
 
+using std::vector;
 //!Simple enum to hold commands
 enum ZebraMessageName
-				{SOFTWARE_RESET                             = 0,
-				 GET_PART_ID 	                            ,
-                 LOGIN			                            ,
-                 COMMAND_TRANSMISSION_ERROR                 ,
-                 GET_VERSION	                            ,
-
-                 FEEDRATE_MOTOR_CONTROL						,
-                 SEND_POSITION_AT_MOTION                    ,
-                 FEED                                       ,
-
-                 NORTH_SOUTH_MOTOR_MOVEMENT                 ,
-                 SEND_POSITION_AT_MOVEMENT_NORTH_SOUTH      ,
-
-                 EAST_WEST_MOTOR_MOVEMENT                   ,
-				 SEND_POSITION_AT_MOVEMENT_EAST_WEST        ,
-
-                 CUTTING_MOTOR_CONTROL                      ,
-                 CUTTING_SPEED                              ,
-                 RETURN_SPEED                               ,
-                 HANDWHEEL_POSITION							,
+				{
                  UNKNOWN
                 };
 
@@ -37,8 +20,6 @@ class AT_CORE ZebraMessage : public ABObject
 	public:
 					            ZebraMessage(const string& cmd = "", bool hasCS = false);
 
-        string		            receiver() const;
-        string		            sender() const;
 		string		            command() const;
 		string					data() const;
 		string		            getFullMessage() const;
@@ -48,13 +29,8 @@ class AT_CORE ZebraMessage : public ABObject
         bool					calculateCheckSum();
 
 	private:
-    	string 					mReceiver;
-        string 					mSender;
-        string					mData;
-        string					mCheckSum;
-        string 					mCommandString;
-//        bool					mIsResponse;
-        ZebraMessageName			mCommandName;
+        vector<unsigned char>	mData;
+        ZebraMessageName	   	mCommandName;
         bool					parse(const string& cmd, bool isResponse = false);
 };
 

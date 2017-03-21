@@ -1,0 +1,36 @@
+LIBRARY     ssiDLL.DLL
+
+DESCRIPTION 'Copyright 2000,2001 Symbol Technologies, Inc. All Rights Reserved'
+
+EXPORTS
+    AbortImageXfer @1
+    SSIConnect @2
+    SSIDisconnect @3
+    PullTrigger @4
+    ReleaseTrigger @5
+    RequestAllParameters @6
+    RequestParameters @7
+    EnterLowPwrMode @8
+    SetParameters @9
+    SnapShot @10
+    AimOn @11
+    AimOff @12
+    TransmitVersion @13
+    TransmitVideo @14
+    SoundBeeper @15
+	LedOn @16
+	LedOff @17
+	ScanEnable @18
+	ScanDisable @19
+	RequestScannerCapabilities @20
+	SetParamPersistance @21
+	AbortMacroPdf @22
+	FlushMacroPdf @23
+	SetVideoBuffer @24
+	SetImageBuffer @25
+	SetDecodeBuffer @26
+	SetParameterBuffer @27
+	SetVersionBuffer @28
+	SetCapabilitiesBuffer @29
+	ReturnDLLVersion @30
+

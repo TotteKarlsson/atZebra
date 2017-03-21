@@ -26,7 +26,7 @@
 #include "TRegistryProperties.h"
 #include "TSTDStringLabeledEdit.h"
 #include "mtkIniFileC.h"
-#include "ZebraConnection.h"
+#include "atZebraConnection.h"
 #include "pies.h"
 #include "TFloatLabeledEdit.h"
 #include "atZebraMessageConsumer.h"
@@ -70,6 +70,7 @@ class TMainForm : public TRegistryForm
 	TPanel *mMiddleLeftPanel;
 	TSTDStringEdit *mCheckSumEdit;
 	TSTDStringEdit *mRawCMDE;
+	TButton *Button2;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall FormCreate(TObject *Sender);
 
@@ -84,6 +85,7 @@ class TMainForm : public TRegistryForm
 	void __fastcall mSendBtn1Click(TObject *Sender);
 	void __fastcall OpenAboutFormAExecute(TObject *Sender);
 	void __fastcall mRawCMDEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
+	void __fastcall Button2Click(TObject *Sender);
 
 
     private:

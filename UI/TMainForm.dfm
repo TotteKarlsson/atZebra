@@ -46,6 +46,15 @@ object MainForm: TMainForm
       Height = 388
       Align = alLeft
       TabOrder = 0
+      object Button2: TButton
+        Left = 24
+        Top = 16
+        Width = 75
+        Height = 25
+        Caption = 'Beep'
+        TabOrder = 0
+        OnClick = Button2Click
+      end
     end
   end
   object SB: TStatusBar
