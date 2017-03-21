@@ -48,12 +48,21 @@ object MainForm: TMainForm
       TabOrder = 0
       object Button2: TButton
         Left = 24
-        Top = 16
+        Top = 120
         Width = 75
         Height = 25
         Caption = 'Beep'
         TabOrder = 0
         OnClick = Button2Click
+      end
+      object Button3: TButton
+        Left = 24
+        Top = 32
+        Width = 75
+        Height = 25
+        Caption = 'Connect'
+        TabOrder = 1
+        OnClick = Button3Click
       end
     end
   end

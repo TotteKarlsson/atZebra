@@ -6,6 +6,7 @@
 
 #pragma comment(lib, "atCore.lib")
 #pragma comment(lib, "atDataBase.lib")
+#pragma comment(lib, "atZebraDLL.lib")
 
 #pragma comment(lib, "VCLCommon.bpi")
 #pragma comment(lib, "DuneComponents.bpi")

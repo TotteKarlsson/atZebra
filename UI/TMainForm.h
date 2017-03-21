@@ -71,6 +71,7 @@ class TMainForm : public TRegistryForm
 	TSTDStringEdit *mCheckSumEdit;
 	TSTDStringEdit *mRawCMDE;
 	TButton *Button2;
+	TButton *Button3;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall FormCreate(TObject *Sender);
 
@@ -86,6 +87,7 @@ class TMainForm : public TRegistryForm
 	void __fastcall OpenAboutFormAExecute(TObject *Sender);
 	void __fastcall mRawCMDEKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
 	void __fastcall Button2Click(TObject *Sender);
+	void __fastcall Button3Click(TObject *Sender);
 
 
     private:

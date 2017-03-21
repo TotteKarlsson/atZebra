@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{D8D366A9-D5D3-46DE-8F49-29B761EEF6B7}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="source\ssidll\atZebraDLL.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="atZebra.cbproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="atZebraDLL">
+        <MSBuild Projects="source\ssidll\atZebraDLL.cbproj"/>
+    </Target>
+    <Target Name="atZebraDLL:Clean">
+        <MSBuild Projects="source\ssidll\atZebraDLL.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="atZebraDLL:Make">
+        <MSBuild Projects="source\ssidll\atZebraDLL.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="atZebra">
+        <MSBuild Projects="atZebra.cbproj"/>
+    </Target>
+    <Target Name="atZebra:Clean">
+        <MSBuild Projects="atZebra.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="atZebra:Make">
+        <MSBuild Projects="atZebra.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="atZebraDLL;atZebra"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="atZebraDLL:Clean;atZebra:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="atZebraDLL:Make;atZebra:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
