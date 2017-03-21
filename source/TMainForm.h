@@ -13,7 +13,6 @@
 #include <Vcl.StdActns.hpp>
 //---------------------------------------------------------------------------
 #include "source/atZebraApplicationMessages.h"
-#include "source/atZebraDataStructures.h"
 #include "mtkIniFileC.h"
 #include "mtkIniFileProperties.h"
 #include "mtkLogFileReader.h"
@@ -26,10 +25,7 @@
 #include "TRegistryProperties.h"
 #include "TSTDStringLabeledEdit.h"
 #include "mtkIniFileC.h"
-#include "atZebraConnection.h"
-#include "pies.h"
 #include "TFloatLabeledEdit.h"
-#include "atZebraMessageConsumer.h"
 #include "TSTDStringEdit.h"
 using mtk::Property;
 using mtk::SQLite;
@@ -86,11 +82,6 @@ class TMainForm : public TRegistryForm
     private:
         bool                                            gCanClose;
         TApplicationProperties                          mAppProperties;
-		ZebraConnection	  								mZebra;
-
-        												//!Consume Zebra messages
-        ZebraMessageConsumer		  					mZebraConsumer;
-
         int												getCOMPortNumber();
         void __fastcall                                 logMsg();
 		LogFileReader                                   mLogFileReader;
@@ -108,15 +99,15 @@ class TMainForm : public TRegistryForm
 
 		void __fastcall 								onConnectedToZebra();
         void __fastcall 								onDisConnectedToZebra();
-		void __fastcall                                 AppInBox(ATWindowStructMessage& Msg);
+//		void __fastcall                                 AppInBox(ATWindowStructMessage& Msg);
 
     public:
                     __fastcall                          TMainForm(TComponent* Owner);
                     __fastcall                          ~TMainForm();
 
-        BEGIN_MESSAGE_MAP
-                  MESSAGE_HANDLER(UWM_MESSAGE,        ATWindowStructMessage,         AppInBox);
-        END_MESSAGE_MAP(TForm)
+//        BEGIN_MESSAGE_MAP
+//                  MESSAGE_HANDLER(UWM_MESSAGE,        ATWindowStructMessage,         AppInBox);
+//        END_MESSAGE_MAP(TForm)
 };
 
 extern PACKAGE TMainForm *MainForm;

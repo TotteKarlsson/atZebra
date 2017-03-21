@@ -9,7 +9,14 @@ using Poco::DateTimeFormatter;
 using namespace mtk;
 
 extern HWND gOtherAppWindow;
-//extern TSplashForm*  gSplashForm;
+
+//This one is called from the reader thread
+void __fastcall TMainForm::logMsg()
+{
+    infoMemo->Lines->Add(vclstr(mLogFileReader.getData()));
+    mLogFileReader.purge();
+}
+
 void __fastcall TMainForm::FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
 {
     if(Key == VK_ESCAPE)
@@ -17,7 +24,6 @@ void __fastcall TMainForm::FormKeyDown(TObject *Sender, WORD &Key, TShiftState S
         Close();
     }
 }
-
 
 void __fastcall TMainForm::OpenAboutFormAExecute(TObject *Sender)
 {
@@ -89,31 +95,19 @@ void __fastcall TMainForm::mConnectZebraBtnClick(TObject *Sender)
 {
 	if(mConnectZebraBtn->Caption == "Open")
     {
-        if(mZebra.connect(getCOMPortNumber()))
-        {
-            Log(lInfo) << "Connected to a Zebra device";
-        }
-        else
-        {
-            Log(lInfo) << "Connection failed";
-        }
     }
     else
     {
-        if(!mZebra.disConnect())
-        {
-			Log(lError) << "Failed to close serial port";
-        }
     }
 
-    if(mZebra.isConnected())
-    {
-	    onConnectedToZebra();
-    }
-    else
-    {
-		onDisConnectedToZebra();
-    }
+//    if(mZebra.isConnected())
+//    {
+//	    onConnectedToZebra();
+//    }
+//    else
+//    {
+//		onDisConnectedToZebra();
+//    }
 }
 
 BOOL CALLBACK FindOtherWindow(HWND hwnd, LPARAM lParam)
@@ -132,38 +126,38 @@ BOOL CALLBACK FindOtherWindow(HWND hwnd, LPARAM lParam)
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TMainForm::AppInBox(ATWindowStructMessage& msg)
-{
-    if(msg.lparam == NULL)
-    {
-        return;
-    }
-
-    try
-    {
-        ApplicationMessageEnum aMsg = msg.wparam;
-
-        switch(aMsg)
-        {
-            case atZebraSplashWasClosed:
-                Log(lDebug2) << "Splash form sent message that it was closed";
-            break;
-
-			case atZebraMessage:
-            {
-            	ZebraMessage* m = (ZebraMessage*) msg.lparam;
-                Log(lInfo) << "Handling Zebra message:" << m->getMessageNameAsString();
-                delete m;
-            }
-            default:
-            break ;
-        }
-	}
-	catch(...)
-	{
-		Log(lError) << "Received an unhandled windows message!";
-	}
-}
+//void __fastcall TMainForm::AppInBox(ATWindowStructMessage& msg)
+//{
+//    if(msg.lparam == NULL)
+//    {
+//        return;
+//    }
+//
+//    try
+//    {
+//        ApplicationMessageEnum aMsg = msg.wparam;
+//
+//        switch(aMsg)
+//        {
+//            case atZebraSplashWasClosed:
+//                Log(lDebug2) << "Splash form sent message that it was closed";
+//            break;
+//
+//			case atZebraMessage:
+//            {
+//            	ZebraMessage* m = (ZebraMessage*) msg.lparam;
+//                Log(lInfo) << "Handling Zebra message:" << m->getMessageNameAsString();
+//                delete m;
+//            }
+//            default:
+//            break ;
+//        }
+//	}
+//	catch(...)
+//	{
+//		Log(lError) << "Received an unhandled windows message!";
+//	}
+//}
 
 
 

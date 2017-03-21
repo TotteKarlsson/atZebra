@@ -33,13 +33,9 @@ using namespace at;
 
 extern string 	gLogFileName;
 extern string 	gApplicationRegistryRoot;
-extern string 	gDefaultAppTheme;
 extern string 	gFullDateTimeFormat;
 extern bool 	gIsDevelopmentRelease;
 extern string 	gCommonAppDataLocation;
-
-unsigned char highByte(unsigned int val);
-unsigned char lowByte(unsigned int val);
 //---------------------------------------------------------------------------
 __fastcall TMainForm::TMainForm(TComponent* Owner)
     : TRegistryForm(gApplicationRegistryRoot, "MainForm", Owner),
@@ -48,20 +44,11 @@ __fastcall TMainForm::TMainForm(TComponent* Owner)
     mLogLevel(lAny),
     gCanClose(true),
     mLogFileReader(joinPath(gCommonAppDataLocation, gLogFileName), &logMsg),
-    mCOMPort(0),
-    mZebraConsumer(mZebra, Handle)
+    mCOMPort(0)
 {
     TMemoLogger::mMemoIsEnabled = false;
     setupIniFile();
     setupAndReadIniParameters();
-    mZebraConsumer.start();
-}
-
-//This one is called from the reader thread
-void __fastcall TMainForm::logMsg()
-{
-    infoMemo->Lines->Add(vclstr(mLogFileReader.getData()));
-    mLogFileReader.purge();
 }
 
 //---------------------------------------------------------------------------

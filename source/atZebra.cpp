@@ -11,6 +11,8 @@
 #include "mtkLogger.h"
 #include "mtkMoleculixException.h"
 #include "mtkSQLite.h"
+USEFORM("TMainForm.cpp", MainForm);
+//---------------------------------------------------------------------------
 #pragma package(smart_init)
 
 using namespace mtk;
@@ -20,19 +22,14 @@ extern string	    gAppName				    = "atZebra";
 extern HWND         gOtherAppWindow             = NULL;
 extern bool 		gAppIsStartingUp 			= true;
 extern string       gApplicationRegistryRoot    = joinPath("\\Software\\Allen Institute", gAppName);
-extern string       gDefaultAppTheme            = "Iceberg Classico";
 extern string       gAppMutexName           	= gAppName + "AppMutex";
 extern string       gRestartMutexName           = gAppName + "RestartMutex";
 extern string       gFullDateTimeFormat         = "%Y-%m-%dT%H:%M:%S";
 extern string       gDateFormat                 = "%Y-%m-%d";
 extern string       gTimeFormat                 = "%H:%M:%S";
-
 extern string       gCommonAppDataLocation      = joinPath(getSpecialFolder(CSIDL_LOCAL_APPDATA), gAppName);
 extern string       gLogFileLocation            = "";
 extern string       gLogFileName                = gAppName + ".log";
-//extern bool         gIsDevelopmentRelease       = true;
-//extern bool         gHideSplash                 = true;
-//extern TSplashForm* gSplashForm                 = NULL;
 
 BOOL CALLBACK FindOtherWindow(HWND hwnd, LPARAM lParam) ;
 
@@ -82,7 +79,8 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
         Application->Initialize();
         Application->MainFormOnTaskBar = true;
 
-		TStyleManager::TrySetStyle(gDefaultAppTheme.c_str());
+		TStyleManager::TrySetStyle("Auric");
+		Application->CreateForm(__classid(TMainForm), &MainForm);
 		Application->Title = vclstr(gAppName);
         Application->ProcessMessages();
 		Application->Run();

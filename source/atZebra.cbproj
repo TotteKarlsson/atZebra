@@ -145,23 +145,14 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <CppCompile Include="atZebra.cpp">
             <BuildOrder>0</BuildOrder>
         </CppCompile>
-        <CppCompile Include="atZebraConnection.cpp">
-            <DependentOn>atZebraConnection.h</DependentOn>
-            <BuildOrder>11</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="atZebraMessage.cpp">
-            <DependentOn>atZebraMessage.h</DependentOn>
-            <BuildOrder>10</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="atZebraMessageConsumer.cpp">
-            <DependentOn>atZebraMessageConsumer.h</DependentOn>
-            <BuildOrder>11</BuildOrder>
-        </CppCompile>
         <CppCompile Include="auto_link.cpp">
             <BuildOrder>9</BuildOrder>
         </CppCompile>
         <CppCompile Include="ClosingAppLogic.cpp">
             <BuildOrder>11</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Forms\TAboutZebraForm.cpp">
+            <BuildOrder>10</BuildOrder>
         </CppCompile>
         <CppCompile Include="InitializingAppLogic.cpp">
             <BuildOrder>12</BuildOrder>
@@ -169,12 +160,13 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <CppCompile Include="Misc.cpp">
             <BuildOrder>13</BuildOrder>
         </CppCompile>
-        <CppCompile Include="MiscDataBase.cpp">
-            <BuildOrder>14</BuildOrder>
-        </CppCompile>
         <CppCompile Include="TMainForm.cpp">
+            <Form>MainForm</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>UI\TMainForm.h</DependentOn>
             <BuildOrder>15</BuildOrder>
         </CppCompile>
+        <FormResources Include="TMainForm.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
