@@ -258,6 +258,10 @@ SSIDLL_API int __stdcall            RequestAllParameters(int nComPort);
 
 SSIDLL_API int __stdcall            AimOn(int nComPort);
 SSIDLL_API int __stdcall            AimOff(int nComPort);
+
+SSIDLL_API int __stdcall            IlluminationOn(int nComPort);
+SSIDLL_API int __stdcall            IlluminationOff(int nComPort);
+
 SSIDLL_API int __stdcall            LedOn(int nComPort, unsigned char nLEDselection);
 SSIDLL_API int __stdcall            LedOff(int nComPort, unsigned char nLEDselection);
 SSIDLL_API int __stdcall            ScanEnable(int nComPort);

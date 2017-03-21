@@ -43,7 +43,7 @@ object MainForm: TMainForm
     object mMiddleLeftPanel: TPanel
       Left = 1
       Top = 1
-      Width = 320
+      Width = 440
       Height = 388
       Align = alLeft
       TabOrder = 0
@@ -67,29 +67,65 @@ object MainForm: TMainForm
       object GroupBox2: TGroupBox
         Left = 8
         Top = 136
-        Width = 185
-        Height = 105
-        Caption = 'Aim'
+        Width = 353
+        Height = 247
+        Caption = 'Settings'
         TabOrder = 1
-        object mAimOFFRB: TRadioButton
+        object mScannerAimRG: TRadioGroup
           Left = 16
-          Top = 24
-          Width = 113
-          Height = 17
-          Caption = 'Aim off'
-          Checked = True
+          Top = 83
+          Width = 145
+          Height = 49
+          Caption = 'Aim'
+          Columns = 2
+          ItemIndex = 1
+          Items.Strings = (
+            'On'
+            'Off')
           TabOrder = 0
-          TabStop = True
-          OnClick = aimClick
+          OnClick = SettingsRGClick
         end
-        object mAimOnRB: TRadioButton
-          Left = 16
-          Top = 47
-          Width = 113
-          Height = 17
-          Caption = 'Aim on'
+        object mScannerIllumRG: TRadioGroup
+          Left = 180
+          Top = 83
+          Width = 145
+          Height = 49
+          Caption = 'Illumination'
+          Columns = 2
+          ItemIndex = 1
+          Items.Strings = (
+            'On'
+            'Off')
           TabOrder = 1
-          OnClick = aimClick
+          OnClick = SettingsRGClick
+        end
+        object mScannerLEDRG: TRadioGroup
+          Left = 16
+          Top = 137
+          Width = 145
+          Height = 49
+          Caption = 'LED'
+          Columns = 2
+          ItemIndex = 1
+          Items.Strings = (
+            'On'
+            'Off')
+          TabOrder = 2
+          OnClick = SettingsRGClick
+        end
+        object mScannerEnabledRG: TRadioGroup
+          Left = 16
+          Top = 23
+          Width = 145
+          Height = 49
+          Caption = 'Enabled'
+          Columns = 2
+          ItemIndex = 1
+          Items.Strings = (
+            'On'
+            'Off')
+          TabOrder = 3
+          OnClick = SettingsRGClick
         end
       end
     end

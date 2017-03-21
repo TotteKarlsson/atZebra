@@ -27,17 +27,12 @@
 /*	Include Files ***********************************************************/
 #include <windows.h>
 #include <commctrl.h>
-
 #include "ssidll.h"
 #include "commthreads.h"
 #include "comport.h"
 
-
 /****************************************************************************/
 /*	Local Variables **********************************************************/
-
-
-
 
 /*****************************************************************************
 *	SYNOPSIS:		CComThreads::CComThreads()
@@ -53,7 +48,6 @@ CComThreads::CComThreads()
 {
 }
 
-
 /*****************************************************************************
 *	SYNOPSIS:		CComThreads::CComThreads()
 *
@@ -67,7 +61,6 @@ CComThreads::CComThreads()
 CComThreads::~CComThreads()
 {
 }
-
 
 /*****************************************************************************
 *	SYNOPSIS:		int CComThreads::GlobalInitialize(HWND hwnd, int nPort)
@@ -139,20 +132,18 @@ int CComThreads::GlobalInitialize(HWND hwnd, int nPort)
 											// so timer callbacks will know which CComPort Object the timeout is for.
 
    return (ret_val);
-
 }
-
 
 /*****************************************************************************
 *	SYNOPSIS:		void CComThreads::GlobalCleanup()
 *
 *	DESCRIPTION:	Deletes Timers, Critical Section and closes Exit
-*						event handle. 	
+*						event handle.
 *
 *	PARAMETERS:		none
 *
 *	RETURN VALUE:	none
-*	INPUTS:			
+*	INPUTS:
 *	OUTPUTS:			CComThreads ready for deletion
 *
 *	NOTES:			See notes for GlobalInitialize()
@@ -165,16 +156,11 @@ int CComThreads::GlobalInitialize(HWND hwnd, int nPort)
 ******************************************************************************/
 void CComThreads::GlobalCleanup(int nPort)
 {
-
-	
 	// global cleanup for protocolhandler - deletes timers
-	TearDownProtocolHandler(nPort);  
-
-
+	TearDownProtocolHandler(nPort);
 	DeleteCriticalSection(&gcsStateMachine);
+   	DeleteCriticalSection(&gcsWriterData);
 
-   DeleteCriticalSection(&gcsWriterData); 
-   
 
 	if(ghThreadExitEvent)
 		CloseHandle(ghThreadExitEvent);
@@ -187,7 +173,7 @@ void CComThreads::GlobalCleanup(int nPort)
 	CleanupStateMachine();	// deletes storage for image
 
 	hWnd = NULL;
-	
+
 
    return;
 }
@@ -196,7 +182,7 @@ void CComThreads::GlobalCleanup(int nPort)
 /*****************************************************************************
 *	SYNOPSIS:		int CComThreads::StartThreads(LPVOID lpV)
 *
-*	DESCRIPTION:	Creates reader and writer threads	
+*	DESCRIPTION:	Creates reader and writer threads
 *
 *	PARAMETERS:		lpV: really pointer to this for use in thread callback functions
 *
@@ -212,15 +198,15 @@ void CComThreads::GlobalCleanup(int nPort)
 *						to exit only.
 *
 *	PSEUDOCODE:		Initialize the return status to no error
-*						Call the function to create the reader thread and store 
+*						Call the function to create the reader thread and store
 *							read handle in PortInfo
 *						If a null value is returned, set the error code and set the
 *							writer thread to null in PortInfo
 *						Else
 *							Call the function to create the writer thread and store
 *								the handle in PortInfo
-*							If a non null value is returned sleep a little bit 
-*							Else set the error code 
+*							If a non null value is returned sleep a little bit
+*							Else set the error code
 *						Return the error code
 *
 ******************************************************************************/
@@ -235,17 +221,17 @@ int CComThreads::StartThreads(LPVOID lpV)
 
 	// 257 is max byes per packet - we assume no interchar delay and expect to see all the chars within this timeout
 	// ... We allow some extra time also.
-	nPACKETSTARTTIMEOUT =  (DWORD)(  ((280 * 1000) + (((double)pPortInfo->dwBaudRate/10) - 1)) / ((double)pPortInfo->dwBaudRate/10)) + 100; 
+	nPACKETSTARTTIMEOUT =  (DWORD)(  ((280 * 1000) + (((double)pPortInfo->dwBaudRate/10) - 1)) / ((double)pPortInfo->dwBaudRate/10)) + 100;
 
 	if(nPACKETSTARTTIMEOUT < 500)
 		nPACKETSTARTTIMEOUT = 500;
 
 
-   pREADSTATTHREAD(pPortInfo) = CreateThread( NULL, 
+   pREADSTATTHREAD(pPortInfo) = CreateThread( NULL,
                           0,
 								  ReaderProc,
 								  (LPVOID) pSSI,
-                          0, 
+                          0,
                           &dwReadStatId);
 
    if (pREADSTATTHREAD(pPortInfo) == NULL)

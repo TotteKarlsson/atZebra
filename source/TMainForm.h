@@ -22,18 +22,20 @@
 #include "mtkSQLite.h"
 #include "TApplicationProperties.h"
 #include "TRegistryForm.h"
-#include "TRegistryProperties.h"
 #include "TSTDStringLabeledEdit.h"
 #include "mtkIniFileC.h"
 #include "TFloatLabeledEdit.h"
 #include "TSTDStringEdit.h"
+#include "ssidll/SSIDLL.H"
+
 using mtk::Property;
 using mtk::SQLite;
 using mtk::MessageContainer;
 using mtk::IniFileProperties;
-using mtk::TRegistryProperties;
 
 extern string gApplicationRegistryRoot;
+
+#define MAX_VIDEO_LEN 5000
 
 class TMainForm : public TRegistryForm
 {
@@ -66,8 +68,10 @@ class TMainForm : public TRegistryForm
 	TButton *Button2;
 	TGroupBox *GroupBox1;
 	TGroupBox *GroupBox2;
-	TRadioButton *mAimOFFRB;
-	TRadioButton *mAimOnRB;
+	TRadioGroup *mScannerAimRG;
+	TRadioGroup *mScannerIllumRG;
+	TRadioGroup *mScannerLEDRG;
+	TRadioGroup *mScannerEnabledRG;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall FormCreate(TObject *Sender);
 
@@ -80,7 +84,7 @@ class TMainForm : public TRegistryForm
 	void __fastcall mConnectZebraBtnClick(TObject *Sender);
 	void __fastcall OpenAboutFormAExecute(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);
-	void __fastcall aimClick(TObject *Sender);
+	void __fastcall SettingsRGClick(TObject *Sender);
 
     private:
         bool                                            gCanClose;
@@ -104,13 +108,42 @@ class TMainForm : public TRegistryForm
         void __fastcall 								onDisConnectedToZebra();
 //		void __fastcall                                 AppInBox(ATWindowStructMessage& Msg);
 
+
+		unsigned char 									VideoData[MAX_VIDEO_LEN];
+		unsigned char*									g_pImageData;
+
+														//Decoder events
+		void __fastcall                                 onWMDecode(TMessage& Msg);
+		void __fastcall                                 onSSIEvent(TMessage& Msg);
+		void __fastcall                                 onSSIImage(TMessage& Msg);
+		void __fastcall                                 onSSIError(TMessage& Msg);
+		void __fastcall                                 onSSITimeout(TMessage& Msg);
+
     public:
                     __fastcall                          TMainForm(TComponent* Owner);
                     __fastcall                          ~TMainForm();
 
-//        BEGIN_MESSAGE_MAP
-//                  MESSAGE_HANDLER(UWM_MESSAGE,        ATWindowStructMessage,         AppInBox);
-//        END_MESSAGE_MAP(TForm)
+        BEGIN_MESSAGE_MAP
+            MESSAGE_HANDLER(WM_DECODE, TMessage, onWMDecode);
+//          ON_MESSAGE(WM_SWVERSION, OnSSIVersion)
+//          ON_MESSAGE(WM_CAPABILITIES, OnSSICapabilities)
+			MESSAGE_HANDLER(WM_IMAGE, TMessage, onSSIImage)
+//          ON_MESSAGE(WM_XFERSTATUS, OnSSIxferStatus)
+//          ON_MESSAGE(WM_VIDEOIMAGE, OnSSIVideo)
+          	MESSAGE_HANDLER(WM_ERROR, TMessage, onSSIError)
+//          ON_MESSAGE(WM_PARAMS, OnSSIParams)
+          	MESSAGE_HANDLER(WM_TIMEOUT, TMessage, onSSITimeout)
+            MESSAGE_HANDLER(WM_EVENT, TMessage, onSSIEvent)
+//          ON_MESSAGE(WM_CMDCOMPLETEMSG, OnSSICommandCompleted)
+//          ON_MESSAGE(WM_USER_GETSWTRIGPARAM, OnGetSWTrigParam)
+//          ON_MESSAGE(WM_USER_GETIMAGETYPES, OnGetImageFileTypesParam)
+//          ON_MESSAGE(WM_USER_GETVIEWFINDERPARAM, OnGetViewFinderParam)
+//          ON_MESSAGE(WM_SENDGETVERSIONMSG, OnWM_SENDGETVERSIONMSG)
+//          ON_MESSAGE(WM_SENDGETCAPABILITIESMSG, OnWM_SENDGETCAPABILITIESMSG)
+
+        END_MESSAGE_MAP(TForm)
+
+
 };
 
 extern PACKAGE TMainForm *MainForm;

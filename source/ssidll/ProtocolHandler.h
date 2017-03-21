@@ -34,35 +34,37 @@
 
 /* Defines all the SSI commands -=- these are the SSIMESSAGE opcodes - KEEP IN ASCENDING NUMERIC ORDER */
 #define		FLUSH_MACRO_PDF	      0x10
-#define		ABORT_MACRO_PDF		   0x11
-#define		REQUEST_REVISION	      0xA3
-#define		REPLY_REVISION		      0xA4
-#define		IMAGE_DATA			      0xB1
-#define		VIDEO_DATA		      	0xB4
-#define		AIM_OFF				      0xC4
-#define		AIM_ON				      0xC5
-#define		PARAM_SEND			      0xC6
-#define		PARAM_REQUEST		      0xC7
-#define		PARAM_DEFAULTS		      0xC8
-#define		CMD_ACK				      0xD0
-#define		CMD_NAK				      0xD1
-#define		FLUSH_QUEUE			      0xD2
-#define		CAPABILITIES_REQUEST    0xD3
-#define		CAPABILITIES_REPLY	   0xD4
-#define		BATCH_REQUEST		      0xD5
-#define		BATCH_DATA			      0xD6
-#define		START_SESSION		      0xE4
-#define		STOP_SESSION		      0xE5
-#define		BEEP				         0xE6  
-#define		LED_ON				      0xE7
-#define		LED_OFF				      0xE8
-#define		SCAN_ENABLE			      0xE9
-#define		SCAN_DISABLE		      0xEA
-#define		SLEEP				         0xEB
-#define		DECODE_DATA			      0xF3
-#define		EVENT				         0xF6
-#define		IMAGER_MODE			      0xF7
-#define		LAST_OPCODE					IMAGER_MODE
+#define		ABORT_MACRO_PDF		  0x11
+#define		REQUEST_REVISION	  0xa3
+#define		REPLY_REVISION		  0xA4
+#define		IMAGE_DATA			  0xB1
+#define		VIDEO_DATA		      0xB4
+#define		ILLUMINATION_OFF	  0xC0
+#define		ILLUMINATION_ON	  	  0xC1
+#define		AIM_OFF				  0xC4
+#define		AIM_ON				  0xC5
+#define		PARAM_SEND			  0xC6
+#define		PARAM_REQUEST		  0xC7
+#define		PARAM_DEFAULTS		  0xC8
+#define		CMD_ACK				  0xD0
+#define		CMD_NAK				  0xD1
+#define		FLUSH_QUEUE			  0xD2
+#define		CAPABILITIES_REQUEST  0XD3
+#define		CAPABILITIES_REPLY	  0xD4
+#define		BATCH_REQUEST		  0xD5
+#define		BATCH_DATA			  0xD6
+#define		START_SESSION		  0xE4
+#define		STOP_SESSION		  0xE5
+#define		BEEP				  0xE6
+#define		LED_ON				  0xE7
+#define		LED_OFF				  0xE8
+#define		SCAN_ENABLE			  0xE9
+#define		SCAN_DISABLE		  0xEA
+#define		SLEEP				  0xEB
+#define		DECODE_DATA			  0xF3
+#define		EVENT				  0xF6
+#define		IMAGER_MODE			  0xF7
+#define		LAST_OPCODE			  IMAGER_MOdE
 
 
 

@@ -106,40 +106,5 @@ BOOL CALLBACK FindOtherWindow(HWND hwnd, LPARAM lParam)
 	return TRUE;
 }
 
-//---------------------------------------------------------------------------
-//void __fastcall TMainForm::AppInBox(ATWindowStructMessage& msg)
-//{
-//    if(msg.lparam == NULL)
-//    {
-//        return;
-//    }
-//
-//    try
-//    {
-//        ApplicationMessageEnum aMsg = msg.wparam;
-//
-//        switch(aMsg)
-//        {
-//            case atZebraSplashWasClosed:
-//                Log(lDebug2) << "Splash form sent message that it was closed";
-//            break;
-//
-//			case atZebraMessage:
-//            {
-//            	ZebraMessage* m = (ZebraMessage*) msg.lparam;
-//                Log(lInfo) << "Handling Zebra message:" << m->getMessageNameAsString();
-//                delete m;
-//            }
-//            default:
-//            break ;
-//        }
-//	}
-//	catch(...)
-//	{
-//		Log(lError) << "Received an unhandled windows message!";
-//	}
-//}
-
-
 
 

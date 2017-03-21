@@ -34,11 +34,13 @@
 /*	Local Variables *********************************************************/
 
 /* for handling multiple com ports per process */
-static CRITICAL_SECTION csPort = {0};				/* values within SSI_Ports[] are changed within this critical section */
-static CComPort *SSI_Ports[MAX_COM_PORTS] = {0};
-static int nProcesses = 0;								/* the critical section csPort is initialized when this goes from 0 to 1 */
+static CRITICAL_SECTION 	csPort = {0};						/* values within SSI_Ports[] are changed within this critical section */
+static CComPort*			SSI_Ports[MAX_COM_PORTS] = {0};
+static int 					nProcesses = 0;						/* the critical section csPort is initialized when this goes from 0 to 1 */
+
 #define VER_MAJOR 1
 #define VER_MINOR 0
+
 static g_nVersion = (unsigned)((VER_MAJOR <<8) + VER_MINOR);
 /*****************************************************************************
 *	SYNOPSIS:		static CComPort *GetSSIComHandler(int nComPort)	
@@ -890,7 +892,7 @@ SSIDLL_API int __stdcall AimOn(int nComPort)
 		{
 			SSI->SetLastError(SSICOMM_NOERROR);	
 				
-			ret_val = SSI->ProtocolHandler->ServiceUserCommand(USER_CMD_EVENT,AIM_ON, NULL,0);
+			ret_val = SSI->ProtocolHandler->ServiceUserCommand(USER_CMD_EVENT, AIM_ON, NULL,0);
 			if(ret_val == 0)
 				SSI->SetLastError(SSICOMM_BUSY);
 		}
@@ -943,6 +945,110 @@ SSIDLL_API int __stdcall AimOff(int nComPort)
 			SSI->SetLastError(SSICOMM_NOERROR);	
 				
 			ret_val = SSI->ProtocolHandler->ServiceUserCommand(USER_CMD_EVENT,AIM_OFF, NULL,0);
+			if(ret_val == 0)
+				SSI->SetLastError(SSICOMM_BUSY);
+		}
+      else
+        SSI->SetLastError(ERR_SSI_HWND);
+	}
+	if(!ret_val)
+		return GetLastProtocolError(nComPort);
+	else
+		return 0; // success
+
+}
+
+/*****************************************************************************
+*	SYNOPSIS:		SSIDLL_API int __stdcall  IlluminiationOn(int nComPort)
+*
+*	DESCRIPTION:	Sends command to scanner to turn on the aiming light
+*
+*	PARAMETERS:		nComPort: the com port number
+*
+*	RETURN VALUE:	Zero if command was sent to scanner successfully o/w the error code
+*	INPUTS:			SSI
+*	OUTPUTS:			The global error code will be set if unsuccessful send
+*
+*
+*	PSEUDOCODE:		Set ret_val to FALSE
+*                 If there is an SSI Object
+*						   if there is a valid com device and window handle
+*							   Clear the error code
+*							   Call the function to send the command to the scanner
+*							   seting the ret_val to that function's return value
+*                       if ret_val is false,
+*                          Set the error code to busy
+*                    Else set the error code
+*						If the ret_val is false return the error code
+*                 Else return zero for success
+*
+*
+******************************************************************************/
+SSIDLL_API int __stdcall IlluminationOn(int nComPort)
+{
+	int ret_val = FALSE;
+	CComPort * SSI = GetSSIComHandler(nComPort);
+
+
+	if(SSI)
+	{
+		if(SSI->g_hwnd  && COMDEV(SSI->PortInfo))
+		{
+			SSI->SetLastError(SSICOMM_NOERROR);
+
+			ret_val = SSI->ProtocolHandler->ServiceUserCommand(USER_CMD_EVENT, ILLUMINATION_ON, NULL,0);
+			if(ret_val == 0)
+				SSI->SetLastError(SSICOMM_BUSY);
+		}
+      else
+        SSI->SetLastError(ERR_SSI_HWND);
+	}
+	if(!ret_val)
+		return GetLastProtocolError(nComPort);
+	else
+		return 0; // success
+
+}
+
+/*****************************************************************************
+*	SYNOPSIS:		SSIDLL_API int __stdcall  IlluminiationOff(int nComPort)
+*
+*	DESCRIPTION:	Sends command to scanner to turn off the aiming light
+*
+*	PARAMETERS:		nComPort: the com port number
+*
+*	RETURN VALUE:	Zero if command was sent to scanner successfully o/w the error code
+*	INPUTS:			SSI
+*	OUTPUTS:			The global error code will be set if unsuccessful send
+*
+*
+*	PSEUDOCODE:		Set ret_val to FALSE
+*                 If there is an SSI Object
+*						   if there is a valid com device and window handle
+*							   Clear the error code
+*							   Call the function to send the command to the scanner
+*							   seting the ret_val to that function's return value
+*                       if ret_val is false,
+*                          Set the error code to busy
+*                    Else set the error code
+*						If the ret_val is false return the error code
+*                 Else return zero for success
+*
+*
+******************************************************************************/
+SSIDLL_API int __stdcall IlluminationOff(int nComPort)
+{
+	int ret_val = FALSE;
+	CComPort * SSI = GetSSIComHandler(nComPort);
+
+
+	if(SSI)
+	{
+		if(SSI->g_hwnd  && COMDEV(SSI->PortInfo))
+		{
+			SSI->SetLastError(SSICOMM_NOERROR);
+
+			ret_val = SSI->ProtocolHandler->ServiceUserCommand(USER_CMD_EVENT, ILLUMINATION_OFF, NULL,0);
 			if(ret_val == 0)
 				SSI->SetLastError(SSICOMM_BUSY);
 		}
