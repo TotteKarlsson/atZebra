@@ -30,27 +30,25 @@
 
 typedef struct TTYInfo
 {
-   HANDLE	hCommPort;
-	HANDLE	hReaderStatus;
-	HANDLE	hWriter ;
-   DWORD    dwEventFlags;
+    HANDLE hCommPort;
+    HANDLE hReaderStatus;
+    HANDLE hWriter ;
+    DWORD  dwEventFlags;
 
-   CHAR     chFlag, chXON, chXOFF;
-   WORD     wXONLimit, wXOFFLimit;
-   DWORD    fRtsControl;
-   DWORD    fDtrControl;
-   BOOL     fConnected, 
-            fCTSOutFlow, fDSROutFlow, fDSRInFlow, 
-            fXonXoffOutFlow, fXonXoffInFlow,
-            fTXafterXoffSent;
-			  
+    CHAR   chFlag, chXON, chXOFF;
+    WORD   wXONLimit, wXOFFLimit;
+    DWORD  fRtsControl;
+    DWORD  fDtrControl;
+    BOOL   fConnected,
+           fCTSOutFlow, fDSROutFlow, fDSRInFlow,
+           fXonXoffOutFlow, fXonXoffInFlow,
+           fTXafterXoffSent;
 
+    BYTE   bPort, bByteSize, bParity, bStopBits ;
+    DWORD  dwBaudRate ;
 
-   BYTE     bPort, bByteSize, bParity, bStopBits ;
-   DWORD    dwBaudRate ;
- 
-   COMMTIMEOUTS timeoutsorig;
-   COMMTIMEOUTS timeoutsnew;
+    COMMTIMEOUTS timeoutsorig;
+    COMMTIMEOUTS timeoutsnew;
 } TTYInfo;
 
 
@@ -92,8 +90,6 @@ typedef struct TTYInfo
 #define XONXOFFOUTFLOW( x ) (x.fXonXoffOutFlow)
 #define XONXOFFINFLOW( x )  (x.fXonXoffInFlow)
 #define TXAFTERXOFFSENT(x)  (x.fTXafterXoffSent)
-
-
 
 // for call to PurgeComm
 

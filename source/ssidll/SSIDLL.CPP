@@ -12,7 +12,7 @@
 *
 *	EDIT HISTORY:
 *	$Log:   U:/SSI_SDK/archives/SSI_SDKv2.0/ssi_sdk/ssidll/SSIDLL.CPP-arc  $
- * 
+ *
  *    Rev 1.0   Nov 22 2002 13:25:56   fitzsimj
  * Initial revision.
  * 
@@ -23,7 +23,6 @@
 
 /****************************************************************************/
 /*	Include Files ************************************************************/
-//#include "stdafx.h"
 
 // Insert your headers here
 #define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
@@ -278,18 +277,16 @@ SSIDLL_API int __stdcall SSIConnect( HWND hwnd, long Baud, int Port)
 				AddSSIComHandler(SSI,Port);
 				Sleep(50);
 				ret_val = TRUE;
-				
 			}
-			else  // if SetComPort fails, there is no connection 
+			else  // if SetComPort fails, there is no connection
 			{
 				error_code = GetLastProtocolError(Port);
 				delete SSI;
 				SSI = NULL;
 			}
-			
 		}
 	}
- 
+
 	if(!ret_val)
 	{
 		if(SSI)
@@ -300,7 +297,6 @@ SSIDLL_API int __stdcall SSIConnect( HWND hwnd, long Baud, int Port)
 	else
 		return 0; // success
 	
-
 }
 
 

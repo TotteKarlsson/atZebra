@@ -64,6 +64,10 @@ class TMainForm : public TRegistryForm
 	TPanel *mTopPanel;
 	TPanel *mMiddleLeftPanel;
 	TButton *Button2;
+	TGroupBox *GroupBox1;
+	TGroupBox *GroupBox2;
+	TRadioButton *mAimOFFRB;
+	TRadioButton *mAimOnRB;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall FormCreate(TObject *Sender);
 
@@ -76,6 +80,7 @@ class TMainForm : public TRegistryForm
 	void __fastcall mConnectZebraBtnClick(TObject *Sender);
 	void __fastcall OpenAboutFormAExecute(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);
+	void __fastcall aimClick(TObject *Sender);
 
     private:
         bool                                            gCanClose;

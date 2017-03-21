@@ -47,14 +47,50 @@ object MainForm: TMainForm
       Height = 388
       Align = alLeft
       TabOrder = 0
-      object Button2: TButton
-        Left = 24
-        Top = 120
-        Width = 75
-        Height = 25
-        Caption = 'Beep'
+      object GroupBox1: TGroupBox
+        Left = 8
+        Top = 16
+        Width = 185
+        Height = 105
+        Caption = 'Beeper'
         TabOrder = 0
-        OnClick = Button2Click
+        object Button2: TButton
+          Left = 16
+          Top = 32
+          Width = 75
+          Height = 25
+          Caption = 'Beep'
+          TabOrder = 0
+          OnClick = Button2Click
+        end
+      end
+      object GroupBox2: TGroupBox
+        Left = 8
+        Top = 136
+        Width = 185
+        Height = 105
+        Caption = 'Aim'
+        TabOrder = 1
+        object mAimOFFRB: TRadioButton
+          Left = 16
+          Top = 24
+          Width = 113
+          Height = 17
+          Caption = 'Aim off'
+          Checked = True
+          TabOrder = 0
+          TabStop = True
+          OnClick = aimClick
+        end
+        object mAimOnRB: TRadioButton
+          Left = 16
+          Top = 47
+          Width = 113
+          Height = 17
+          Caption = 'Aim on'
+          TabOrder = 1
+          OnClick = aimClick
+        end
       end
     end
   end
@@ -132,7 +168,6 @@ object MainForm: TMainForm
       Top = 12
       Width = 145
       Height = 21
-      ItemIndex = 0
       TabOrder = 0
       Text = 'COM1'
       Items.Strings = (

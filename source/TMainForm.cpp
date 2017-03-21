@@ -61,7 +61,7 @@ void __fastcall TMainForm::mConnectZebraBtnClick(TObject *Sender)
 {
 	if(mConnectZebraBtn->Caption == "Open")
     {
-        int status = SSIConnect(this->Handle, 9600, mCOMPort);
+        int status = SSIConnect(this->Handle, 9600, getCOMPortNumber());
         Log(lError) << "Connect status: "<<status;
 
     }
@@ -90,12 +90,29 @@ void __fastcall TMainForm::onDisConnectedToZebra()
     mConnectZebraBtn->Caption         = "Open";
 }
 
-
 //---------------------------------------------------------------------------
 void __fastcall TMainForm::Button2Click(TObject *Sender)
 {
-	int status = SoundBeeper(17, ONESHORTHI);
-    Log(lError) << "Beep status: "<<status;
+	int status = SoundBeeper(getCOMPortNumber(), ONESHORTHI);
+    Log(lInfo) << "Beep status: "<<status;
 }
 
+
 //---------------------------------------------------------------------------
+void __fastcall TMainForm::aimClick(TObject *Sender)
+{
+	//Check which one was clicked
+    TRadioButton *rb = dynamic_cast<TRadioButton *>(Sender);
+    int status;
+    if(rb == mAimOnRB)
+    {
+    	status = AimOn(getCOMPortNumber());
+    }
+    else
+    {
+		status = AimOff(getCOMPortNumber());
+    }
+    Log(lInfo) << "Aim on/off status: "<<status;
+}
+
+

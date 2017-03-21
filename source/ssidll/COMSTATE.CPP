@@ -1,14 +1,13 @@
-
 /*****************************************************************************
 *	FILENAME:	ComState.cpp
 *	COPYRIGHT(c) 2002 Symbol Technologies Inc.  All rights reserved
 *
-*	DESCRIPTION:	Implementation of the state machine  for SSI Protocol 
+*	DESCRIPTION:	Implementation of the state machine  for SSI Protocol
 *
 *	NOTES:			The state machine may be entered by a user request (api
 *						call), by reception of a packet from the scanner, by a
 *						response timeout or by a packet timeout - meaning some data was
-*						received before the response timeout but it was not a valid packet.  
+*						received before the response timeout but it was not a valid packet.
 *
 *						The user may make a request for data which causes the scanner
 *						to send the requested data within a timeout period..
@@ -19,26 +18,26 @@
 *						The ResponseTimer may send a notification that no data has come back
 *						from the scanner in response to a user request or a user command.
 *
-*						The Reader thread may send a notification that a valid ssi packet has 
+*						The Reader thread may send a notification that a valid ssi packet has
 *						been received and is ready for processing.
-*						
+*
 *						The PacketTimer may send a notification that some data was received but
-*						not all of it was sent or it failed it's checksum or some other format 
+*						not all of it was sent or it failed it's checksum or some other format
 *						error was detected.
-*	
+*
 *	AUTHOR: A.Schuessler
 *	CREATION DATE: 10/28/02
 *	DERIVED FROM: New File
 *
 *	EDIT HISTORY:
 *	$Log:   U:/SSI_SDK/archives/SSI_SDKv2.0/ssi_sdk/ssidll/COMSTATE.CPP-arc  $
- * 
+ *
  *    Rev 1.0   Nov 22 2002 13:25:44   fitzsimj
  * Initial revision.
- * 
+ *
  *    Rev 1.1   Nov 11 2002 11:49:44   schuesla
  * Fixed brackets for array delete
- * 
+ *
  *    Rev 1.0   Oct 28 2002 14:38:46   schuesla
  * Initial revision.
 *
@@ -50,17 +49,13 @@
 #define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
 #include <windows.h>
 #include "ssidll.h"
-#include "CommThreads.h" 
+#include "CommThreads.h"
 #include "gcpjpeg.h"
 #include "comport.h"
 
 
-
 /****************************************************************************/
 /*	Defines, typedefs, etc. *************************************************/
-
-
-
 
 #define IdleState								0 //  No pending host request, no decoder input expected
 
@@ -69,14 +64,14 @@
 #define Unsolicited_Barcode_Pending		1 //  No pending host request, expecting next barcode data packet from decoder
 #define Unsolicited_Image_Pending		2 //  No pending host request, expecting next image data packet from decoder
 #define Unsolicited_Video_Pending		3 //  No pending host request, expecting next video data packet from decoder
-	
+
 #define HOST_ABORTXFER_Pending			4 //  Host has requested image transfer abort, waiting for line to go quiet
 
 #define HOST_CMD_Pending					5 //  Host Command has been issued, expecting ACK packet from decoder
 
-// these could have been folded into 2 states, but extra logic for handling which type of data would make code less clear 
-//... Host Request for data packet response has been issued, expecting next requested data packet 
-//... Host Request for data packet response has been issued, expecting last requested data packet 
+// these could have been folded into 2 states, but extra logic for handling which type of data would make code less clear
+//... Host Request for data packet response has been issued, expecting next requested data packet
+//... Host Request for data packet response has been issued, expecting last requested data packet
 #define HOST_REQforBATCHDATA_Pending	6 //	This host request is not implemented
 #define HOST_REQforPARAMDATA_Pending	7 //	Host Request for parameter data has been issued, expecting next requested data packet
 #define HOST_REQforCapDATA_Pending		8 //	Host Request for capabilties data has been issued, expecting next requested data packet
@@ -84,10 +79,9 @@
 
 
 // for  packet data that may or may not be multipacketed
- 
 #define FIRST_AND_LAST			3	// one packet and it's marked as the last packet
 #define FIRST_IN_SERIES			2	// first packet of multipacket series
-#define INTERMEDIATE_PACKET	1	// multipacket series - not first and not last packet
+#define INTERMEDIATE_PACKET		1	// multipacket series - not first and not last packet
 #define LAST_IN_SERIES			0	// mutlipacket series and it's the last packet
 
 
@@ -98,12 +92,9 @@
 #define BMP_IMAGE_TYPE   0x33
 #define TIFF_IMAGE_TYPE  0x34
 
-#define PREAMBLE_BYTES 10	
+#define PREAMBLE_BYTES 10
 
-#define MAX_RETRIES	2	// max number of times we'll resend a packet to the scanner.	
-
-
-
+#define MAX_RETRIES	2	// max number of times we'll resend a packet to the scanner.
 
 
 /*****************************************************************************
@@ -119,45 +110,41 @@
 ******************************************************************************/
 void CComThreads::SetupStateMachine(void)
 {
-	nRetries = 0;
-	CurrentState = IdleState;
+    nRetries = 0;
+    CurrentState = IdleState;
 
-	SSIcmd_code = 0;
-	SSIAckNakCode = 0;
+    SSIcmd_code = 0;
+    SSIAckNakCode = 0;
 
-	cur_barcode_len = 0;
-	cur_frame_len = 0;
-	cur_image_len = 0;
-	cur_param_len = 0;
+    cur_barcode_len = 0;
+    cur_frame_len = 0;
+    cur_image_len = 0;
+    cur_param_len = 0;
 
+    pImageData = NULL;
+    VideoImageQIndex	= 0;				// streaming video needs a queue to process new packet while sending
+                                            // previous one to user
+    curMAXIMAGESIZE = 0;
 
+    StateMachineInUse = 0;
 
-	pImageData = NULL;
-	VideoImageQIndex	= 0;				// streaming video needs a queue to process new packet while sending
-												// previous one to user
-	curMAXIMAGESIZE = 0;
+    pGlobalVideoData = NULL;
+    GlobalVideoDataLen = 0;
 
-	StateMachineInUse = 0;
+    pGlobalImageData = NULL;
+    GlobalImageDataLen;
 
-	pGlobalVideoData = NULL;
-	GlobalVideoDataLen = 0;
+    pGlobalDecodeData = NULL;
+    GlobalDecodeDataLen = 0;
 
-   pGlobalImageData = NULL;
-	GlobalImageDataLen;
-	
-   pGlobalDecodeData = NULL;
-	GlobalDecodeDataLen = 0;
-	
-   pGlobalParamData = NULL;
-	GlobalParamDataLen = 0;
+    pGlobalParamData = NULL;
+    GlobalParamDataLen = 0;
 
-   pGlobalCapabilitiesData = NULL;
-	GlobalParamDataLen = 0;
+    pGlobalCapabilitiesData = NULL;
+    GlobalParamDataLen = 0;
 
-   pGlobalVersionData = NULL;
-	GlobalVersionDataLen = 0;
-
-
+    pGlobalVersionData = NULL;
+    GlobalVersionDataLen = 0;
 }
 
 /*****************************************************************************
@@ -177,7 +164,6 @@ void CComThreads::CleanupStateMachine(void)
 	if(pImageData)
 		delete [] pImageData;
 	pImageData = NULL;
-
 }
 
 

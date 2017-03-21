@@ -22,10 +22,7 @@
 *****************************************************************************/
 
 #ifndef __COMPORT_H__
-
 #define __COMPORT_H__
-
-
 
 /****************************************************************************/
 /*	Nested Include Files ****************************************************/
@@ -33,49 +30,36 @@
 #include "CommThreads.h"		// for reader and writer threads  
 #include "PortInfoStruct.h"	// for storing serial communication settings
 
-
-
 /****************************************************************************/
 /*	Defines, typedefs, etc. *************************************************/
-
 class CComPort
 {
-public:
+	public:
+        					CComPort(HWND Hwnd);
+        virtual 			~CComPort();
+        BOOL                SetComPort(long Baud, int port);
+        BOOL                Disconnect();
+        int 				LastErrorCode();
+        void 				SetLastError(int code);
 
-	/* Methods */
-    CComPort(HWND Hwnd);
-    virtual ~CComPort();
-	 BOOL SetComPort(long Baud, int port);
-	 BOOL Disconnect();	 
-    int LastErrorCode();
-    void SetLastError(int code);
+        /* data */
+        TTYInfo 			PortInfo;
+        CComThreads*		ProtocolHandler;
 
+        HWND 				g_hwnd;
 
-	/* data */
-
-	TTYInfo PortInfo;
-   CComThreads *ProtocolHandler;
-
-   HWND g_hwnd;
-
-private:
-	/* data */
+	private:
+        int 				g_commErrorCode;
+        OSVERSIONINFO 		m_OSVersion;
 
 
-	int g_commErrorCode;
-	OSVERSIONINFO m_OSVersion;
 
-
-	/* methods */
-	BOOL VersionCheck(void);
-	void InitTTYInfo(void);
-	BOOL UpdateConnection(void);
-   BOOL BreakDownCommPort();
-	int Connect();
-	void CheckComStat(void);
-
+        BOOL             	VersionCheck(void);
+        void             	InitTTYInfo(void);
+        BOOL             	UpdateConnection(void);
+        BOOL             	BreakDownCommPort();
+        int 				Connect();
+        void 				CheckComStat(void);
 };
 
-
-
-#endif  //__COMPORT_H__
+#endif

@@ -132,10 +132,7 @@ void CComThreads::SetupProtocolHandler(int nComPortIndex)
 
 	PacketQInsertIndex	= 0;  // don't really use queues since this is a transaction protocol
 	bPersist = 0;
-
-
-
-}	
+}
 
 /*****************************************************************************
 *	SYNOPSIS:		void CComThreads::TearDownProtocolHandler(int nComPortIndex)

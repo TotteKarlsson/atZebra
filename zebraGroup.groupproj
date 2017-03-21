@@ -9,6 +9,9 @@
         <Projects Include="source\atZebra.cbproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="P:\atUC7\source\atUC7.cbproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -35,14 +38,23 @@
     <Target Name="atZebra:Make">
         <MSBuild Projects="source\atZebra.cbproj" Targets="Make"/>
     </Target>
+    <Target Name="atUC7">
+        <MSBuild Projects="P:\atUC7\source\atUC7.cbproj"/>
+    </Target>
+    <Target Name="atUC7:Clean">
+        <MSBuild Projects="P:\atUC7\source\atUC7.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="atUC7:Make">
+        <MSBuild Projects="P:\atUC7\source\atUC7.cbproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="atZebraDLL;atZebra"/>
+        <CallTarget Targets="atZebraDLL;atZebra;atUC7"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="atZebraDLL:Clean;atZebra:Clean"/>
+        <CallTarget Targets="atZebraDLL:Clean;atZebra:Clean;atUC7:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="atZebraDLL:Make;atZebra:Make"/>
+        <CallTarget Targets="atZebraDLL:Make;atZebra:Make;atUC7:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

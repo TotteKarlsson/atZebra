@@ -23,25 +23,21 @@
 *****************************************************************************/
 
 
-
-
 /****************************************************************************/
 /*	Include Files ***********************************************************/
 #include "windows.h"
 #include "ssidll.h"
 #include "comport.h"
-
+#include <string>
+using namespace std;
 /****************************************************************************/
 /*	Defines, typedefs, etc. **************************************************/
 
 #define DEFAULT_READINTERVAL_T_O	1 // max time to elapse between arrival of 
-#define WIN32_READINTERVAL_T_O	5 // 2 chars beginning with 1st bit of 1st char
+#define WIN32_READINTERVAL_T_O		5 // 2 chars beginning with 1st bit of 1st char
 
-#define EVENTFLAGS_DEFAULT      (EV_BREAK | EV_CTS | EV_DSR | EV_ERR | EV_RING | EV_RLSD)
-#define FLAGCHAR_DEFAULT        0
-
-
-
+#define EVENTFLAGS_DEFAULT      	(EV_BREAK | EV_CTS | EV_DSR | EV_ERR | EV_RING | EV_RLSD)
+#define FLAGCHAR_DEFAULT        	0
 
 /*****************************************************************************
 *	SYNOPSIS:      CComPort::CComPort(HWND hwnd)
@@ -70,32 +66,21 @@
 *							for the com port then create the protocol handler 
 *
 ******************************************************************************/
-
 CComPort::CComPort(HWND hwnd)
 {
-
 	g_commErrorCode = SSICOMM_NOERROR;
-   g_hwnd = hwnd;
+   	g_hwnd = hwnd;
 
-
-   if (!VersionCheck())  // if fails, sets windows version to ver 3.1 which doesn't allow the dll to run 
+   	if (!VersionCheck())  // if fails, sets windows version to ver 3.1 which doesn't allow the dll to run
 	{
         // can't run on this version of Windows */
       g_commErrorCode = SSICOMM_ERRVERSION;
       InitTTYInfo();  // no error codes set, port is NOT CONNECTED
       return;
 	}
-	
-   InitTTYInfo();
+
+   	InitTTYInfo();
 	ProtocolHandler = new CComThreads();  // null constructor
-	
-	
-	
-	
-	return;
-
-
-
 }
 
 
@@ -132,14 +117,14 @@ CComPort::~CComPort()
 *	SYNOPSIS:		BOOL CComPort::VersionCheck(void)
 *
 *	DESCRIPTION:	Verifies that the correct version of Windows is running
-*                 otherwise the dll is not suppported.
+*                 	otherwise the dll is not suppported.
 *
 *	PARAMETERS:		none
 *
 *	RETURN VALUE:	TRUE if version supports the dll, o/w FALSE
 *
 *	NOTES:			If we are unable to obtain the version, the value is set to
-*						an unsupported version.
+*					an unsupported version.
 *
 ******************************************************************************/
 /* verifies that the correct version of Windows is running */
@@ -148,7 +133,7 @@ BOOL CComPort::VersionCheck(void)
 {
 	m_OSVersion.dwOSVersionInfoSize = sizeof(m_OSVersion);
 	if (!GetVersionEx(&m_OSVersion))
-		m_OSVersion.dwPlatformId = VER_PLATFORM_WIN32s; 
+		m_OSVersion.dwPlatformId = VER_PLATFORM_WIN32s;
 
    if (m_OSVersion.dwPlatformId == VER_PLATFORM_WIN32s)
       return FALSE;
@@ -161,33 +146,33 @@ BOOL CComPort::VersionCheck(void)
 *
 *	DESCRIPTION:	Initialize the data structure for all com port values
 *						leaving it in "UNCONNECTED" state with thread handles
-*                 NULL
+*                 	NULL
 *
 *	PARAMETERS:		none
 *
 *	RETURN VALUE:	none
-*	INPUTS:			
-*	OUTPUTS:			TTYInfo
+*	INPUTS:
+*	OUTPUTS:		TTYInfo
 *
 ******************************************************************************/
 void CComPort::InitTTYInfo(void)
 {
-   COMMTIMEOUTS TimeoutsDefault;
+    COMMTIMEOUTS TimeoutsDefault;
 
-   TimeoutsDefault.ReadIntervalTimeout = DEFAULT_READINTERVAL_T_O;
-   TimeoutsDefault.ReadTotalTimeoutMultiplier = 0;
-   TimeoutsDefault.ReadTotalTimeoutConstant = 0;
-   TimeoutsDefault.WriteTotalTimeoutMultiplier = 0;
-   TimeoutsDefault.WriteTotalTimeoutConstant = 0;
+    TimeoutsDefault.ReadIntervalTimeout = DEFAULT_READINTERVAL_T_O;
+    TimeoutsDefault.ReadTotalTimeoutMultiplier = 0;
+    TimeoutsDefault.ReadTotalTimeoutConstant = 0;
+    TimeoutsDefault.WriteTotalTimeoutMultiplier = 0;
+    TimeoutsDefault.WriteTotalTimeoutConstant = 0;
 
-	COMDEV( PortInfo )        = NULL ;
-   CONNECTED( PortInfo )     = FALSE ;
+    COMDEV( PortInfo )        = NULL ;
+    CONNECTED( PortInfo )     = FALSE ;
 
-   PORT( PortInfo )          = 0 ; // invalid value
-   BAUDRATE( PortInfo )      = CBR_115200;
-   BYTESIZE( PortInfo )      = DATABITS_8 ;
-   PARITY( PortInfo )        = NOPARITY ;
-   STOPBITS( PortInfo )      = ONESTOPBIT ;
+    PORT( PortInfo )          = 0 ; // invalid value
+    BAUDRATE( PortInfo )      = CBR_115200;
+    BYTESIZE( PortInfo )      = DATABITS_8 ;
+    PARITY( PortInfo )        = NOPARITY ;
+	STOPBITS( PortInfo )      = ONESTOPBIT ;
 
     //
     // timeouts
@@ -198,13 +183,13 @@ void CComPort::InitTTYInfo(void)
 		TimeoutsDefault.ReadIntervalTimeout = WIN32_READINTERVAL_T_O;
 	};
 
-   TIMEOUTSNEW( PortInfo )   = TimeoutsDefault;
+   	TIMEOUTSNEW( PortInfo )   = TimeoutsDefault;
 
     //
     // read state and status events
     //
 
-   EVENTFLAGS( PortInfo )    = EVENTFLAGS_DEFAULT;
+   	EVENTFLAGS( PortInfo )    = EVENTFLAGS_DEFAULT;
 
 	FLAGCHAR( PortInfo )      = FLAGCHAR_DEFAULT;
 
@@ -212,28 +197,27 @@ void CComPort::InitTTYInfo(void)
     // Flow Control Settings
     //
 
-	DTRCONTROL( PortInfo )    = DTR_CONTROL_DISABLE;  
-   RTSCONTROL( PortInfo )    = RTS_CONTROL_DISABLE;
- 
-   XONLIMIT( PortInfo )      = 0;
-   XOFFLIMIT( PortInfo )     = 0;
-   
+	DTRCONTROL( PortInfo )    = DTR_CONTROL_DISABLE;
+   	RTSCONTROL( PortInfo )    = RTS_CONTROL_DISABLE;
+
+   	XONLIMIT( PortInfo )      = 0;
+   	XOFFLIMIT( PortInfo )     = 0;
+
 
 	CTSOUTFLOW( PortInfo )    = TRUE;
 
-   DSROUTFLOW( PortInfo )    = FALSE;
-   DSRINFLOW( PortInfo )     = FALSE;
-   XONXOFFOUTFLOW(PortInfo)  = FALSE;
-   XONXOFFINFLOW(PortInfo)   = FALSE;
-   TXAFTERXOFFSENT(PortInfo) = FALSE;
+   	DSROUTFLOW( PortInfo )    = FALSE;
+   	DSRINFLOW( PortInfo )     = FALSE;
+   	XONXOFFOUTFLOW(PortInfo)  = FALSE;
+   	XONXOFFINFLOW(PortInfo)   = FALSE;
+   	TXAFTERXOFFSENT(PortInfo) = FALSE;
 
 
-   
+
 	WRITERTHREAD(PortInfo) = NULL;
 	READSTATTHREAD(PortInfo) = NULL;
-   return;
 }
-   
+
 /*****************************************************************************
 *	SYNOPSIS:      BOOL CComPort::SetComPort(long baud, int port )
 *
@@ -309,15 +293,24 @@ BOOL CComPort::SetComPort(long baud, int port )
 BOOL CComPort::Connect()
 {
 
-	TCHAR commport[6] = TEXT("COMx:");
+    int pNr = PORT( PortInfo );
 
-	commport[3] = TCHAR(L'0' + (short)PORT( PortInfo ));
-
+    char portNr[25];//("COM" + toString(pNr));
+    string pNrStr;
+	itoa(pNr, portNr, 10);
+	if(pNr > 10)
+    {
+    	pNrStr = string("\\\\.\\COM") + string(portNr);
+    }
+    else
+    {
+	    pNrStr = "COM" + string(portNr);
+    }
 
     //
     // open communication port handle
     //
-    COMDEV( PortInfo ) = CreateFile( "\\\\.\\COM17", //commport,
+    COMDEV( PortInfo ) = CreateFile( pNrStr.c_str(), //commport,
                                       GENERIC_READ | GENERIC_WRITE, 
                                       0, 
                                       0, 
@@ -343,11 +336,9 @@ BOOL CComPort::Connect()
 		 return FALSE;
     }
 
-
     //
     // Set port state
     //
-
     if(!UpdateConnection())  // PortInfo values stored in DCB then SetCommState called
 	 {
 		 CloseHandle(COMDEV(PortInfo));
@@ -465,7 +456,7 @@ BOOL CComPort::UpdateConnection(void)
    dcb.fParity = TRUE;
 	dcb.fBinary = TRUE;  // this must be true - only allowed value for windows
 	dcb.fErrorChar = FALSE;
-	dcb.fAbortOnError = FALSE; 
+	dcb.fAbortOnError = FALSE;
 	dcb.fNull = FALSE;
 	dcb.EofChar = 0;
 	
@@ -604,9 +595,9 @@ BOOL CComPort::BreakDownCommPort()
 	}
 
 
-   CloseHandle(COMDEV(PortInfo));
+   	CloseHandle(COMDEV(PortInfo));
 	COMDEV(PortInfo) = NULL;
-   CONNECTED( PortInfo ) = FALSE;
+   	CONNECTED( PortInfo ) = FALSE;
 
 	if(READSTATTHREAD(PortInfo))
 		CloseHandle(READSTATTHREAD(PortInfo));
@@ -621,7 +612,6 @@ BOOL CComPort::BreakDownCommPort()
 
    return TRUE;
 }
-
 
 /*****************************************************************************
 *	SYNOPSIS:      void CComPort::CheckComStat(void)
