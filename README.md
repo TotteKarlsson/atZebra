@@ -1,3 +1,3 @@
-# atUC7
+# atZebra
 
-Test APP for controlling the UC7
+Test application for reading barcodes using a Zebra DS457 imager.

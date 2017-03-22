@@ -1,3 +1,5 @@
 Release 0.5.0 (Jan 17)
 =======================
 * Initial commit of the Zebra application code.
+
+--------- 2017 ---------------------------------

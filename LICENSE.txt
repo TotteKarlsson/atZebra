@@ -1,4 +1,4 @@
- * Licensing and Distribution Terms for the atDB API
+ * Licensing and Distribution Terms for the atZebra API
  * Copyright (C) 2016
  *   Totte Karlsson, Forrest Collman & Stephen Smith - Allen Institute for Brain Science
  *
