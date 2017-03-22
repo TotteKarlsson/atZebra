@@ -61,8 +61,9 @@ void __fastcall TMainForm::FormCreate(TObject *Sender)
 			infoMemo->Lines->Add(vclstr(logs[i]));
 		}
 	}
-
+    enableDisableGroupBox(mImagerSettingsGB, false);
 	mLogFileReader.start(true);
+
 }
 
 //---------------------------------------------------------------------------

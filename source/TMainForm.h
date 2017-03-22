@@ -26,7 +26,9 @@
 #include "mtkIniFileC.h"
 #include "TFloatLabeledEdit.h"
 #include "TSTDStringEdit.h"
-#include "../thirdparty/ssidll/SSIDLL.H"
+#include "atExporter.h"
+#include "atATObject.h"
+#include "barcodereader/atDS457.h"
 //---------------------------------------------------------------------------
 
 using mtk::Property;
@@ -36,25 +38,6 @@ using mtk::IniFileProperties;
 
 extern string gApplicationRegistryRoot;
 
-#define MAX_VIDEO_LEN 5000
-#define SWTRIG_PARAMNUM			        0x8a
-#define HOST_SWTRIG				        0x08
-#define EXTENDED_PARAMNUM		        0xf0
-#define IMAGE_FILETYPE_PARAMNUM	        0x30
-#define BMP_FILE_SELECTION		        0x03
-#define TIFF_FILE_SELECTION		        0x04
-#define JPEG_FILE_SELECTION		        0x01
-#define VIDEOVIEWFINDER_PARAMNUM		0x44
-
-#define WM_USER_GETSWTRIGPARAM 			(WM_USER + 100)
-#define WM_USER_GETIMAGETYPES 			(WM_USER_GETSWTRIGPARAM + 1)
-#define WM_USER_GETVIEWFINDERPARAM 		(WM_USER_GETIMAGETYPES + 1)
-#define WM_SENDGETVERSIONMSG			(WM_USER_GETVIEWFINDERPARAM + 1)
-#define WM_SENDGETCAPABILITIESMSG		(WM_SENDGETVERSIONMSG + 1)
-#define BITMAP_TYPE				         0	// for m_ImageType
-#define TIFF_TYPE				         1
-#define JPEG_TYPE				         2
-#define IMAGE_TYPE_UNKNOWN		         3
 
 class TMainForm : public TRegistryForm
 {
@@ -86,7 +69,7 @@ class TMainForm : public TRegistryForm
 	TPanel *mMiddleLeftPanel;
 	TButton *Button2;
 	TGroupBox *GroupBox1;
-	TGroupBox *GroupBox2;
+	TGroupBox *mImagerSettingsGB;
 	TRadioGroup *mScannerAimRG;
 	TRadioGroup *mScannerIllumRG;
 	TRadioGroup *mScannerLEDRG;
@@ -114,6 +97,9 @@ class TMainForm : public TRegistryForm
 		void                                            setupWindowTitle();
 		void                                            updateWindowTitle();
 
+        												//!The barcode reader
+        DS457											mZebra;
+
                                                         //INI Parameters...
         IniFileProperties	      	                    mGeneralProperties;
         mtk::Property<int>	                            mBottomPanelHeight;
@@ -125,9 +111,6 @@ class TMainForm : public TRegistryForm
 
 		void __fastcall 								onConnectedToZebra();
         void __fastcall 								onDisConnectedToZebra();
-
-		unsigned char 									VideoData[MAX_VIDEO_LEN];
-		unsigned char*									g_pImageData;
 
 														//Decoder events
 		void __fastcall                                 onWMDecode(TMessage& Msg);
