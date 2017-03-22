@@ -26,7 +26,8 @@
 #include "mtkIniFileC.h"
 #include "TFloatLabeledEdit.h"
 #include "TSTDStringEdit.h"
-#include "ssidll/SSIDLL.H"
+#include "../thirdparty/ssidll/SSIDLL.H"
+//---------------------------------------------------------------------------
 
 using mtk::Property;
 using mtk::SQLite;
@@ -124,8 +125,6 @@ class TMainForm : public TRegistryForm
 
 		void __fastcall 								onConnectedToZebra();
         void __fastcall 								onDisConnectedToZebra();
-//		void __fastcall                                 AppInBox(ATWindowStructMessage& Msg);
-
 
 		unsigned char 									VideoData[MAX_VIDEO_LEN];
 		unsigned char*									g_pImageData;
@@ -161,8 +160,6 @@ class TMainForm : public TRegistryForm
 //          ON_MESSAGE(WM_SENDGETCAPABILITIESMSG, OnWM_SENDGETCAPABILITIESMSG)
 
         END_MESSAGE_MAP(TForm)
-
-
 };
 
 extern PACKAGE TMainForm *MainForm;

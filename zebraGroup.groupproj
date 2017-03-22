@@ -3,10 +3,19 @@
         <ProjectGuid>{D8D366A9-D5D3-46DE-8F49-29B761EEF6B7}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="source\ssidll\atZebraDLL.cbproj">
+        <Projects Include="P:\libs\atapi\source\atCore.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="P:\libs\atapi\thirdparty\ssidll\atSSI.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="P:\libs\atapi\source\barcodereader\atBarcodeReader.cbproj">
             <Dependencies/>
         </Projects>
         <Projects Include="source\atZebra.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="P:\libs\atapi\source\vcl\atVCLCore.cbproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -17,14 +26,32 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
-    <Target Name="atZebraDLL">
-        <MSBuild Projects="source\ssidll\atZebraDLL.cbproj"/>
+    <Target Name="atCore">
+        <MSBuild Projects="P:\libs\atapi\source\atCore.cbproj"/>
     </Target>
-    <Target Name="atZebraDLL:Clean">
-        <MSBuild Projects="source\ssidll\atZebraDLL.cbproj" Targets="Clean"/>
+    <Target Name="atCore:Clean">
+        <MSBuild Projects="P:\libs\atapi\source\atCore.cbproj" Targets="Clean"/>
     </Target>
-    <Target Name="atZebraDLL:Make">
-        <MSBuild Projects="source\ssidll\atZebraDLL.cbproj" Targets="Make"/>
+    <Target Name="atCore:Make">
+        <MSBuild Projects="P:\libs\atapi\source\atCore.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="atSSI">
+        <MSBuild Projects="P:\libs\atapi\thirdparty\ssidll\atSSI.cbproj"/>
+    </Target>
+    <Target Name="atSSI:Clean">
+        <MSBuild Projects="P:\libs\atapi\thirdparty\ssidll\atSSI.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="atSSI:Make">
+        <MSBuild Projects="P:\libs\atapi\thirdparty\ssidll\atSSI.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="atBarcodeReader">
+        <MSBuild Projects="P:\libs\atapi\source\barcodereader\atBarcodeReader.cbproj"/>
+    </Target>
+    <Target Name="atBarcodeReader:Clean">
+        <MSBuild Projects="P:\libs\atapi\source\barcodereader\atBarcodeReader.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="atBarcodeReader:Make">
+        <MSBuild Projects="P:\libs\atapi\source\barcodereader\atBarcodeReader.cbproj" Targets="Make"/>
     </Target>
     <Target Name="atZebra">
         <MSBuild Projects="source\atZebra.cbproj"/>
@@ -35,14 +62,23 @@
     <Target Name="atZebra:Make">
         <MSBuild Projects="source\atZebra.cbproj" Targets="Make"/>
     </Target>
+    <Target Name="atVCLCore">
+        <MSBuild Projects="P:\libs\atapi\source\vcl\atVCLCore.cbproj"/>
+    </Target>
+    <Target Name="atVCLCore:Clean">
+        <MSBuild Projects="P:\libs\atapi\source\vcl\atVCLCore.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="atVCLCore:Make">
+        <MSBuild Projects="P:\libs\atapi\source\vcl\atVCLCore.cbproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="atZebraDLL;atZebra"/>
+        <CallTarget Targets="atCore;atSSI;atBarcodeReader;atZebra;atVCLCore"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="atZebraDLL:Clean;atZebra:Clean"/>
+        <CallTarget Targets="atCore:Clean;atSSI:Clean;atBarcodeReader:Clean;atZebra:Clean;atVCLCore:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="atZebraDLL:Make;atZebra:Make"/>
+        <CallTarget Targets="atCore:Make;atSSI:Make;atBarcodeReader:Make;atZebra:Make;atVCLCore:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
