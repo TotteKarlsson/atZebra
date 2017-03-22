@@ -123,8 +123,8 @@ void setupLogging()
 	string fullLogFileName(joinPath(gLogFileLocation, gLogFileName));
 	clearFile(fullLogFileName);
 	mtk::gLogger.logToFile(fullLogFileName);
-	LogOutput::mShowLogLevel = true;
-	LogOutput::mShowLogTime = false;
-	LogOutput::mUseLogTabs = false;
-	Log(lInfo) << "Logger was setup";
+	LogOutput::mShowLogLevel 	= true;
+	LogOutput::mShowLogTime 	= true;
+	LogOutput::mUseLogTabs 		= false;
+	Log(lInfo) << "The Logger was setup";
 }

@@ -92,7 +92,7 @@ object MainForm: TMainForm
           Height = 49
           Caption = 'LED'
           Columns = 2
-          ItemIndex = 1
+          ItemIndex = 0
           Items.Strings = (
             'On'
             'Off')
@@ -106,7 +106,7 @@ object MainForm: TMainForm
           Height = 49
           Caption = 'Enabled'
           Columns = 2
-          ItemIndex = 1
+          ItemIndex = 0
           Items.Strings = (
             'On'
             'Off')
@@ -208,8 +208,8 @@ object MainForm: TMainForm
     TabOrder = 3
     object mComportCB: TComboBox
       Left = 8
-      Top = 12
-      Width = 145
+      Top = 14
+      Width = 87
       Height = 21
       TabOrder = 0
       Text = 'COM1'
@@ -236,13 +236,31 @@ object MainForm: TMainForm
         'COM20')
     end
     object mConnectZebraBtn: TButton
-      Left = 165
-      Top = 10
+      Left = 209
+      Top = 12
       Width = 50
       Height = 25
       Caption = 'Open'
       TabOrder = 1
       OnClick = mConnectZebraBtnClick
+    end
+    object mBaudRateCB: TComboBox
+      Left = 111
+      Top = 15
+      Width = 76
+      Height = 21
+      ItemIndex = 0
+      TabOrder = 2
+      Text = '9600'
+      Items.Strings = (
+        '9600'
+        '14400'
+        '19200'
+        '38400'
+        '57600'
+        '115200'
+        '128000'
+        '256000')
     end
   end
   object ActionList1: TActionList

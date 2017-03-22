@@ -17,7 +17,6 @@
 #include "Poco/Timezone.h"
 #include "TMainForm.h"
 #include "TMemoLogger.h"
-
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "mtkIniFileC"
@@ -42,6 +41,7 @@ __fastcall TMainForm::TMainForm(TComponent* Owner)
     mLogLevel(lAny),
     mLogFileReader(joinPath(gCommonAppDataLocation, gLogFileName), &logMsg),
     mCOMPort(17),
+    mBaudRate(57600),
     mZebra(this->Handle)
 {
     TMemoLogger::mMemoIsEnabled = false;
@@ -60,7 +60,7 @@ void __fastcall TMainForm::mConnectZebraBtnClick(TObject *Sender)
 	int Comport = getCOMPortNumber();
    	if(mConnectZebraBtn->Caption == "Open")
     {
-        if(mZebra.connect(Comport, 9600) != true)
+        if(mZebra.connect(Comport, 19200) != true)
         {
         	Log(lError) << "Failed to connect barcode reader";
         }
@@ -83,8 +83,16 @@ void __fastcall TMainForm::mConnectZebraBtnClick(TObject *Sender)
 void __fastcall TMainForm::onConnectedToZebra()
 {
     mConnectZebraBtn->Caption = "Close";
-
     enableDisableGroupBox(mImagerSettingsGB, true);
+
+    //Turn into a 'known' state
+	mZebra.aimOff();
+    Sleep(10);
+	mZebra.illuminationOff();
+    Sleep(10);
+    mZebra.LEDsOff();
+    Sleep(10);
+	mZebra.beep(TWOLONGLO);
 }
 
 //---------------------------------------------------------------------------
@@ -133,37 +141,39 @@ void __fastcall TMainForm::onWMDecode(TMessage& Msg)
 	WPARAM w = Msg.WParam;
     LPARAM l = Msg.LParam;
 
-//	//Time do decode
-//    Log(lInfo) << "Got a onWMDecode message..";
-//
-//    // wparam contains the status bits for the data ,
-//	// lparam is the length of the data in bytes (cast to int).
-//	unsigned char decode_buf[3001];
-//
-//	// first thing is to copy the contents of the dll's data buffer to our own.
-//	if((l < 3000) && ((w & BUFFERSIZE_MASK) == BUFFERSIZE_GOOD ))
-//	{
-//		memcpy(decode_buf, VideoData,l);
-//		decode_buf[l] = 0;
-//	}
-//	else if( l && ((w & BUFFERSIZE_MASK) == BUFFERSIZE_ERROR ))
-//    {
-//		strcpy((char *)decode_buf, "TOO MUCH DECODE DATA");
-//    }
-//	else
-//   	{
-//    	strcpy((char *)decode_buf, "NO DECODE STORAGE BUFFER");
-//   	}
-//
-//	decode_buf[3000] = 0;
-//    if(decode_buf[0] == 0x1B)
-//    {
-//    	Log(lInfo) << "A Datamatrix barcode was encoded";
-//    }
-//
-//    decode_buf[0] = ' ';
-//    Log(lInfo) <<decode_buf;
-//	SetDecodeBuffer(getCOMPortNumber(), VideoData, MAX_VIDEO_LEN); // give the dll back the data it needs for the next decode
+	//Time do decode
+    Log(lInfo) << "Got a onWMDecode message..";
+
+    // wparam contains the status bits for the data ,
+	// lparam is the length of the data in bytes (cast to int).
+	unsigned char decode_buf[3001];
+
+	// first thing is to copy the contents of the dll's data buffer to our own.
+	if((l < 3000) && ((w & BUFFERSIZE_MASK) == BUFFERSIZE_GOOD ))
+	{
+		memcpy(decode_buf, mZebra.getMemoryBuffer(), l);
+		decode_buf[l] = 0;
+	}
+	else if( l && ((w & BUFFERSIZE_MASK) == BUFFERSIZE_ERROR ))
+    {
+		strcpy((char *)decode_buf, "TOO MUCH DECODE DATA");
+    }
+	else
+   	{
+    	strcpy((char *)decode_buf, "NO DECODE STORAGE BUFFER");
+   	}
+
+	decode_buf[3000] = 0;
+    if(decode_buf[0] == 0x1B)
+    {
+    	Log(lInfo) << "A Datamatrix barcode was encoded";
+        decode_buf[0] = ' ';
+        Log(lInfo) << decode_buf;
+    }
+    else
+    {
+    	Log(lError) << "Bad barcode reader memory buffer";
+    }
 }
 
 void __fastcall TMainForm::onSSIEvent(TMessage& Msg)

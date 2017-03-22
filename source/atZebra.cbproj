@@ -122,7 +122,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <_TCHARMapping>char</_TCHARMapping>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <LinkPackageStatics>HsBarcode1DRun.lib;HsBarcode2DRun.lib;atVCLCore.lib</LinkPackageStatics>
-        <Debugger_DebugSourcePath>P:\libs\dslib\VCL\Common\;P:\libs\dslib\VCL\Components\;P:\libs\dslib\Common\;P:\libs\atapi\source\serial\;P:\libs\dslib\Common\IPC\;P:\libs\atapi\thirdparty\ssidll\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
+        <Debugger_DebugSourcePath>P:\libs\dslib\VCL\Common\;P:\libs\dslib\VCL\Components\;P:\libs\dslib\Common\;P:\libs\atapi\source\serial\;P:\libs\dslib\Common\IPC\;P:\libs\atapi\thirdparty\ssidll\;P:\libs\dsl\VCL\Forms\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
         <BCC_PCHInject>pch.h</BCC_PCHInject>
         <BCC_PCHCache>true</BCC_PCHCache>
         <Icon_MainIcon>Resources\atDB.ico</Icon_MainIcon>

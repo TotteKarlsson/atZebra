@@ -59,6 +59,7 @@ void __fastcall TMainForm::FormClose(TObject *Sender, TCloseAction &Action)
 	mBottomPanelHeight          	= BottomPanel->Height;
 
 	mCOMPort = mComportCB->ItemIndex + 1;
+    mBaudRate = mBaudRateCB->Items->Strings[mBaudRateCB->ItemIndex].ToInt();
 	mGeneralProperties.write();
 
 	//Write to file

@@ -74,6 +74,7 @@ class TMainForm : public TRegistryForm
 	TRadioGroup *mScannerIllumRG;
 	TRadioGroup *mScannerLEDRG;
 	TRadioGroup *mScannerEnabledRG;
+	TComboBox *mBaudRateCB;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall FormCreate(TObject *Sender);
 
@@ -105,6 +106,7 @@ class TMainForm : public TRegistryForm
         mtk::Property<int>	                            mBottomPanelHeight;
 		mtk::Property<mtk::LogLevel>	                mLogLevel;
 		mtk::Property<int>	                			mCOMPort;
+		mtk::Property<int>	                			mBaudRate;
 
         bool                                            setupAndReadIniParameters();
         void                                            setupIniFile();
