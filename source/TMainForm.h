@@ -36,6 +36,24 @@ using mtk::IniFileProperties;
 extern string gApplicationRegistryRoot;
 
 #define MAX_VIDEO_LEN 5000
+#define SWTRIG_PARAMNUM			        0x8a
+#define HOST_SWTRIG				        0x08
+#define EXTENDED_PARAMNUM		        0xf0
+#define IMAGE_FILETYPE_PARAMNUM	        0x30
+#define BMP_FILE_SELECTION		        0x03
+#define TIFF_FILE_SELECTION		        0x04
+#define JPEG_FILE_SELECTION		        0x01
+#define VIDEOVIEWFINDER_PARAMNUM		0x44
+
+#define WM_USER_GETSWTRIGPARAM 			(WM_USER + 100)
+#define WM_USER_GETIMAGETYPES 			(WM_USER_GETSWTRIGPARAM + 1)
+#define WM_USER_GETVIEWFINDERPARAM 		(WM_USER_GETIMAGETYPES + 1)
+#define WM_SENDGETVERSIONMSG			(WM_USER_GETVIEWFINDERPARAM + 1)
+#define WM_SENDGETCAPABILITIESMSG		(WM_SENDGETVERSIONMSG + 1)
+#define BITMAP_TYPE				         0	// for m_ImageType
+#define TIFF_TYPE				         1
+#define JPEG_TYPE				         2
+#define IMAGE_TYPE_UNKNOWN		         3
 
 class TMainForm : public TRegistryForm
 {
@@ -118,6 +136,7 @@ class TMainForm : public TRegistryForm
 		void __fastcall                                 onSSIImage(TMessage& Msg);
 		void __fastcall                                 onSSIError(TMessage& Msg);
 		void __fastcall                                 onSSITimeout(TMessage& Msg);
+		void __fastcall                                 onSSICapabilities(TMessage& Msg);
 
     public:
                     __fastcall                          TMainForm(TComponent* Owner);
@@ -126,7 +145,7 @@ class TMainForm : public TRegistryForm
         BEGIN_MESSAGE_MAP
             MESSAGE_HANDLER(WM_DECODE, TMessage, onWMDecode);
 //          ON_MESSAGE(WM_SWVERSION, OnSSIVersion)
-//          ON_MESSAGE(WM_CAPABILITIES, OnSSICapabilities)
+          	MESSAGE_HANDLER(WM_CAPABILITIES, TMessage, onSSICapabilities)
 			MESSAGE_HANDLER(WM_IMAGE, TMessage, onSSIImage)
 //          ON_MESSAGE(WM_XFERSTATUS, OnSSIxferStatus)
 //          ON_MESSAGE(WM_VIDEOIMAGE, OnSSIVideo)

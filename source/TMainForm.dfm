@@ -2,8 +2,8 @@ object MainForm: TMainForm
   Left = 0
   Top = 0
   Caption = 'Zebra Test Application'
-  ClientHeight = 643
-  ClientWidth = 983
+  ClientHeight = 529
+  ClientWidth = 744
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -24,8 +24,8 @@ object MainForm: TMainForm
   TextHeight = 13
   object Splitter1: TSplitter
     Left = 0
-    Top = 431
-    Width = 983
+    Top = 317
+    Width = 744
     Height = 3
     Cursor = crVSplit
     Align = alBottom
@@ -36,24 +36,30 @@ object MainForm: TMainForm
   object mMiddlePanel: TPanel
     Left = 0
     Top = 41
-    Width = 983
-    Height = 390
+    Width = 744
+    Height = 276
     Align = alClient
+    Constraints.MinHeight = 276
     TabOrder = 0
+    ExplicitWidth = 983
+    ExplicitHeight = 390
     object mMiddleLeftPanel: TPanel
       Left = 1
       Top = 1
-      Width = 440
-      Height = 388
+      Width = 336
+      Height = 274
       Align = alLeft
       TabOrder = 0
       object GroupBox1: TGroupBox
-        Left = 8
-        Top = 16
-        Width = 185
-        Height = 105
+        Left = 1
+        Top = 194
+        Width = 334
+        Height = 79
+        Align = alBottom
         Caption = 'Beeper'
         TabOrder = 0
+        ExplicitTop = 240
+        ExplicitWidth = 374
         object Button2: TButton
           Left = 16
           Top = 32
@@ -65,14 +71,18 @@ object MainForm: TMainForm
         end
       end
       object GroupBox2: TGroupBox
-        Left = 8
-        Top = 136
-        Width = 353
-        Height = 247
+        Left = 1
+        Top = 1
+        Width = 334
+        Height = 193
+        Align = alClient
         Caption = 'Settings'
         TabOrder = 1
+        ExplicitLeft = 2
+        ExplicitTop = -1
+        ExplicitWidth = 374
         object mScannerAimRG: TRadioGroup
-          Left = 16
+          Left = 9
           Top = 83
           Width = 145
           Height = 49
@@ -86,8 +96,8 @@ object MainForm: TMainForm
           OnClick = SettingsRGClick
         end
         object mScannerIllumRG: TRadioGroup
-          Left = 180
-          Top = 83
+          Left = 171
+          Top = 23
           Width = 145
           Height = 49
           Caption = 'Illumination'
@@ -100,7 +110,7 @@ object MainForm: TMainForm
           OnClick = SettingsRGClick
         end
         object mScannerLEDRG: TRadioGroup
-          Left = 16
+          Left = 9
           Top = 137
           Width = 145
           Height = 49
@@ -114,7 +124,7 @@ object MainForm: TMainForm
           OnClick = SettingsRGClick
         end
         object mScannerEnabledRG: TRadioGroup
-          Left = 16
+          Left = 9
           Top = 23
           Width = 145
           Height = 49
@@ -132,35 +142,41 @@ object MainForm: TMainForm
   end
   object SB: TStatusBar
     Left = 0
-    Top = 624
-    Width = 983
+    Top = 510
+    Width = 744
     Height = 19
     Panels = <>
+    ExplicitTop = 624
+    ExplicitWidth = 983
   end
   object BottomPanel: TPanel
     Left = 0
-    Top = 434
-    Width = 983
+    Top = 320
+    Width = 744
     Height = 190
     Align = alBottom
     TabOrder = 2
+    ExplicitTop = 434
+    ExplicitWidth = 983
     object infoMemo: TMemo
       Left = 1
       Top = 49
-      Width = 981
+      Width = 742
       Height = 140
       Align = alClient
       ScrollBars = ssBoth
       TabOrder = 0
       WordWrap = False
+      ExplicitWidth = 981
     end
     object Panel1: TPanel
       Left = 1
       Top = 1
-      Width = 981
+      Width = 742
       Height = 48
       Align = alTop
       TabOrder = 1
+      ExplicitWidth = 981
       object Button1: TButton
         Left = 8
         Top = 12
@@ -195,10 +211,11 @@ object MainForm: TMainForm
   object mTopPanel: TPanel
     Left = 0
     Top = 0
-    Width = 983
+    Width = 744
     Height = 41
     Align = alTop
     TabOrder = 3
+    ExplicitWidth = 983
     object mComportCB: TComboBox
       Left = 8
       Top = 12

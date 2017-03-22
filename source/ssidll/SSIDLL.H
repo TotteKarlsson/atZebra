@@ -100,7 +100,7 @@
 *
 *	EDIT HISTORY:
 *	$Log:   U:/SSI_SDK/archives/SSI_SDKv2.0/ssi_sdk/ssidll/SSIDLL.H-arc  $
- * 
+ *
  *    Rev 1.0   Nov 22 2002 13:25:58   fitzsimj
  * Initial revision.
  * 
@@ -308,18 +308,18 @@ SSIDLL_API unsigned int __stdcall 	ReturnDLLVersion(void);
 **
 */
 
-#define BUFFERSIZE_MASK 0x0003
-#define BUFFERSIZE_GOOD 0x0003
-#define BUFFERSIZE_ERROR 0x0000
-#define NOBUFFER_ERROR 0x0001
+#define BUFFERSIZE_MASK 	        0x0003
+#define BUFFERSIZE_GOOD 	        0x0003
+#define BUFFERSIZE_ERROR 	        0x0000
+#define NOBUFFER_ERROR 		        0x0001
 
 
-SSIDLL_API int __stdcall                 SetVideoBuffer(int nComPort, unsigned char *pData, long max_length);
-SSIDLL_API int __stdcall                 SetImageBuffer(int nComPort, unsigned char *pData, long max_length);
-SSIDLL_API int __stdcall                 SetDecodeBuffer(int nComPort, unsigned char *pData, long max_length);
-SSIDLL_API int __stdcall                 SetParameterBuffer(int nComPort, unsigned char *pData, long max_length);
-SSIDLL_API int __stdcall                 SetVersionBuffer(int nComPort, unsigned char *pData, long max_length);
-SSIDLL_API int __stdcall                 SetCapabilitiesBuffer(int nComPort, unsigned char *pData, long max_length);
+SSIDLL_API int __stdcall            SetVideoBuffer(int nComPort, unsigned char *pData, long max_length);
+SSIDLL_API int __stdcall            SetImageBuffer(int nComPort, unsigned char *pData, long max_length);
+SSIDLL_API int __stdcall            SetDecodeBuffer(int nComPort, unsigned char *pData, long max_length);
+SSIDLL_API int __stdcall            SetParameterBuffer(int nComPort, unsigned char *pData, long max_length);
+SSIDLL_API int __stdcall            SetVersionBuffer(int nComPort, unsigned char *pData, long max_length);
+SSIDLL_API int __stdcall            SetCapabilitiesBuffer(int nComPort, unsigned char *pData, long max_length);
 
 /**********************************************************************************************/
 /**   Windows Messages sent to calling process ************************************************/

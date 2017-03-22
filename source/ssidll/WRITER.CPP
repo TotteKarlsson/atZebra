@@ -92,13 +92,7 @@ BOOL CComThreads::WriteBuffer(BYTE *buffer, DWORD ByteCount)
 		return FALSE;
 	}
 	return TRUE;
-
 }
-
-
-
-
-
 
 /*****************************************************************************
 *	SYNOPSIS:		DWORD WINAPI WriterProc(LPVOID lpV)
@@ -133,7 +127,6 @@ BOOL CComThreads::WriteBuffer(BYTE *buffer, DWORD ByteCount)
 ******************************************************************************/
 DWORD WINAPI WriterProc(LPVOID lpV)
 {
-
 	HANDLE hArray[2];
 	DWORD dwRes;
 	BOOL fDone = FALSE;
@@ -181,10 +174,9 @@ DWORD WINAPI WriterProc(LPVOID lpV)
 	return 1;
 }
 
-
 /*****************************************************************************
 *	SYNOPSIS:		BOOL HandleWriteRequests(LPVOID lpV)
-* 
+*
 *	DESCRIPTION:	Disables or enables the response timer depending on the
 *						value of the response timer interval then
 *						calls the writer function with the stored data in the
@@ -228,7 +220,6 @@ BOOL HandleWriteRequests(LPVOID lpV)
 	return TRUE;
 
 }
-
 
 /*****************************************************************************
 *	SYNOPSIS:		int WriterGeneric(LPVOID lpV, char * lpBuf, DWORD dwToWrite)
@@ -383,19 +374,19 @@ int WriterGeneric(LPVOID lpV, char * lpBuf, DWORD dwToWrite)
 			// we send fatal error to user - user should call disconnect 	
 			}
 		}
-		else 
+		else
 		{
         //
         // writefile returned immediately
         //
 
 			 // scanner will nak resend us - uncomment for debugging
-		//	if (dwWritten != dwToWrite) 
+		//	if (dwWritten != dwToWrite)
 		//		pSSI->ProtocolHandler->OnError(SSITHREAD_WRITEERR);
 		}
 		CloseHandle(osWrite.hEvent);
 	} // end else we have a good handle
-    
+
 	return(ret_val);
 }
 

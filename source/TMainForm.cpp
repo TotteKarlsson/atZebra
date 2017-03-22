@@ -133,41 +133,6 @@ void __fastcall TMainForm::SettingsRGClick(TObject *Sender)
     Log(lInfo) << "Status: "<<status;
 }
 
-
-//---------------------------------------------------------------------------
-//void __fastcall TMainForm::AppInBox(ATWindowStructMessage& msg)
-//{
-//    if(msg.lparam == NULL)
-//    {
-//        return;
-//    }
-//
-//    try
-//    {
-//        ApplicationMessageEnum aMsg = msg.wparam;
-//
-//        switch(aMsg)
-//        {
-//            case atZebraSplashWasClosed:
-//                Log(lDebug2) << "Splash form sent message that it was closed";
-//            break;
-//
-//			case atZebraMessage:
-//            {
-//            	ZebraMessage* m = (ZebraMessage*) msg.lparam;
-//                Log(lInfo) << "Handling Zebra message:" << m->getMessageNameAsString();
-//                delete m;
-//            }
-//            default:
-//            break ;
-//        }
-//	}
-//	catch(...)
-//	{
-//		Log(lError) << "Received an unhandled windows message!";
-//	}
-//}
-
 void __fastcall TMainForm::onWMDecode(TMessage& Msg)
 {
 	WPARAM w = Msg.WParam;
@@ -198,12 +163,11 @@ void __fastcall TMainForm::onWMDecode(TMessage& Msg)
 	decode_buf[3000] = 0;
     if(decode_buf[0] == 0x1B)
     {
-    	Log(lInfo) << "Datamatrix barcode";
+    	Log(lInfo) << "A Datamatrix barcode was encoded";
     }
 
     decode_buf[0] = ' ';
     Log(lInfo) <<decode_buf;
-
 	SetDecodeBuffer(getCOMPortNumber(), VideoData, MAX_VIDEO_LEN); // give the dll back the data it needs for the next decode
 }
 
@@ -216,9 +180,90 @@ void __fastcall TMainForm::onSSIEvent(TMessage& Msg)
 
 void __fastcall TMainForm::onSSIImage(TMessage& Msg)
 {
-	WPARAM w = Msg.WParam;
-    LPARAM l = Msg.LParam;
-    Log(lInfo) << "There was an onSSIImage event..";
+//	WPARAM w = Msg.WParam;
+//    LPARAM l = Msg.LParam;
+//    Log(lInfo) << "There was an onSSIImage event..";
+//
+//	String msg;
+//	unsigned char *pData = NULL;   //(unsigned char *) w;
+//	DWORD length = (DWORD)l;
+//	unsigned char *pImageType = pData;
+//	int filetype = IMAGE_TYPE_UNKNOWN;
+//	//CMainFrame * pFrame = (CMainFrame *)AfxGetApp()->m_pMainWnd;  // This is our access to menu related stuff
+//
+//	if((w & BUFFERSIZE_MASK) == BUFFERSIZE_GOOD)
+//	{
+//    	msg.Format("Image Complete");	// Main pane of status bar gives status
+//		pData = g_pImageData;
+//		pImageType = pData;
+//	}
+//   	else if ((w & BUFFERSIZE_MASK) == BUFFERSIZE_ERROR)
+//    {
+//    	msg.Format("Image TOO BIG");	// Main pane of status bar gives status
+//    }
+//   	else
+//    {
+//    	msg.Format("NO Image BUFFER");	// Main pane of status bar gives status
+//    }
+//
+////	MyMessage = "Received Image";	// Right side tells what message we got from the dll
+//	//onSSIxferStatus((WPARAM)l, l);	// Update the transfer status display to show we got all of the expected image data
+//
+//
+//	// Since we are done with the transfer, we'll enable the user to do whatever they want again
+//	// ...(as long as it's supported).
+//
+////	GetDlgItem(IDC_BUTTON_VIDEO)->EnableWindow(1);
+////	GetDlgItem(IDC_BUTTON_SNAPSHOT)->EnableWindow(1);
+////	if(m_bViewFinderSupported)
+////		GetDlgItem(IDC_CHECK_VIEWFINDER)->EnableWindow(1);
+////	GetDlgItem(IDC_RADIO_BMP)->EnableWindow(1);
+////	GetDlgItem(IDC_RADIO_TIFF)->EnableWindow(1);
+////	GetDlgItem(IDC_RADIO_JPEG)->EnableWindow(1);
+////	GetDlgItem(IDC_CHECK_SWTRIGGER)->EnableWindow(1);
+//
+//
+//	// If the input data begins with "BM" it's a bitmap
+//	// Else if it starts with "MM" or "II" its a tiff - note that we expect big endian from the scanner, and ignore
+//	// ...the II for indication for byte ordering.
+//
+//	if(pImageType != NULL)
+//   	{
+//   		if((*pImageType == 'B') && (*(pImageType +1) == 'M'))
+//	   	{
+//        	filetype = BITMAP_TYPE;
+//		   	SetupBMPforDisplay( pData,  l);			 // Process input and next Paint message will display our data
+//		   	pFrame->m_ImgFileExtension = "bmp";  // Let user choose file save from menu, and set file filter to bmp extension.
+//	   	}
+//	   	else if (((*pImageType == 'M') && (*(pImageType +1) == 'M')) || ((*pImageType == 'I') && (*(pImageType +1) == 'I')))
+//	   	{
+//        	SetupTIFFforDisplay( pData,  l);			// Process input and next Paint message will display our data
+//		   	filetype = TIFF_TYPE;
+//		   	pFrame->m_ImgFileExtension = "tif"; // Let user choose file save from menu, and set file filter to tif extension.
+//	   	}
+//	   	else if((*pImageType == 0xff) && (*(pImageType +1) == 0xd8))
+//	   	{
+//        	filetype = JPEG_TYPE;
+//			SetupJPEGforDisplay(pData,l, FALSE); // False indicates this is not video
+//		   							// Process input and next Paint message will display our data
+//
+//		   	pFrame->m_ImgFileExtension = "jpg";	// Let user choose file save from menu, and set file filter to jpg extension.
+//	   	}
+//	   	else
+//	   	{
+//        	MessageBox("Unknown image format received");
+////		   	pFrame->m_ImgFileExtension = "";		// This will indicate  file save from menu needs to be disabled.
+//	   	}
+//
+//	   	m_ImgFileExt = 	pFrame->m_ImgFileExtension;	// Our copy, so we stay in sync with the menu.
+//
+//	   	if(filetype != IMAGE_TYPE_UNKNOWN)
+//        {
+//		   WriteImgfile((LPTSTR)pData, length, filetype);	// We always write a temp file since we can't hang on to the
+//															// ...dll's data to do it later.
+//        }
+//   }
+//	m_WaitingForSnapShot = FALSE;
 }
 
 void __fastcall TMainForm::onSSITimeout(TMessage& Msg)
@@ -233,4 +278,11 @@ void __fastcall TMainForm::onSSIError(TMessage& Msg)
 	WPARAM w = Msg.WParam;
     LPARAM l = Msg.LParam;
     Log(lInfo) << "There was an onSSIError event..";
+}
+
+void __fastcall TMainForm::onSSICapabilities(TMessage& Msg)
+{
+	WPARAM w = Msg.WParam;
+    LPARAM l = Msg.LParam;
+    Log(lInfo) << "There was an onSSICapabilities event..";
 }
