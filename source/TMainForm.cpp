@@ -282,7 +282,7 @@ void __fastcall TMainForm::onSSIError(TMessage& Msg)
 {
 	WPARAM w = Msg.WParam;
     LPARAM l = Msg.LParam;
-    Log(lInfo) << "There was an onSSIError event..";
+    Log(lInfo) << "There was an onSSIError event.."<<w<<" : "<<l;
 }
 
 void __fastcall TMainForm::onSSICapabilities(TMessage& Msg)
