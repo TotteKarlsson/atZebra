@@ -7,7 +7,7 @@
             <Dependencies/>
         </Projects>
         <Projects Include="P:\libs\atapi\source\barcodereader\atBarcodeReader.cbproj">
-            <Dependencies/>
+            <Dependencies>P:\libs\atapi\thirdparty\ssidll\atSSI.cbproj</Dependencies>
         </Projects>
         <Projects Include="source\atZebra.cbproj">
             <Dependencies>P:\libs\atapi\source\barcodereader\atBarcodeReader.cbproj</Dependencies>
@@ -29,13 +29,13 @@
     <Target Name="atSSI:Make">
         <MSBuild Projects="P:\libs\atapi\thirdparty\ssidll\atSSI.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="atBarcodeReader">
+    <Target Name="atBarcodeReader" DependsOnTargets="atSSI">
         <MSBuild Projects="P:\libs\atapi\source\barcodereader\atBarcodeReader.cbproj"/>
     </Target>
-    <Target Name="atBarcodeReader:Clean">
+    <Target Name="atBarcodeReader:Clean" DependsOnTargets="atSSI:Clean">
         <MSBuild Projects="P:\libs\atapi\source\barcodereader\atBarcodeReader.cbproj" Targets="Clean"/>
     </Target>
-    <Target Name="atBarcodeReader:Make">
+    <Target Name="atBarcodeReader:Make" DependsOnTargets="atSSI:Make">
         <MSBuild Projects="P:\libs\atapi\source\barcodereader\atBarcodeReader.cbproj" Targets="Make"/>
     </Target>
     <Target Name="atZebra" DependsOnTargets="atBarcodeReader">

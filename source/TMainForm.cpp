@@ -41,7 +41,7 @@ __fastcall TMainForm::TMainForm(TComponent* Owner)
     mLogLevel(lAny),
     mLogFileReader(joinPath(gCommonAppDataLocation, gLogFileName), &logMsg),
     mCOMPort(17),
-    mBaudRate(57600),
+    mBaudRate(9600),
     mZebra(this->Handle)
 {
     TMemoLogger::mMemoIsEnabled = false;
@@ -60,7 +60,7 @@ void __fastcall TMainForm::mConnectZebraBtnClick(TObject *Sender)
 	int Comport = getCOMPortNumber();
    	if(mConnectZebraBtn->Caption == "Open")
     {
-        if(mZebra.connect(Comport, 19200) != true)
+        if(mZebra.connect(Comport, mBaudRate) != true)
         {
         	Log(lError) << "Failed to connect barcode reader";
         }
@@ -86,13 +86,13 @@ void __fastcall TMainForm::onConnectedToZebra()
     enableDisableGroupBox(mImagerSettingsGB, true);
 
     //Turn into a 'known' state
-	mZebra.aimOff();
+//	mZebra.aimOff();
+//    Sleep(10);
+//	mZebra.illuminationOff();
+//    Sleep(10);
+//    mZebra.LEDsOff();
     Sleep(10);
-	mZebra.illuminationOff();
-    Sleep(10);
-    mZebra.LEDsOff();
-    Sleep(10);
-	mZebra.beep(TWOLONGLO);
+	mZebra.beep(ONESHORTLO);
 }
 
 //---------------------------------------------------------------------------
@@ -103,10 +103,31 @@ void __fastcall TMainForm::onDisConnectedToZebra()
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TMainForm::Button2Click(TObject *Sender)
+void __fastcall TMainForm::BtnClick(TObject *Sender)
 {
-	int status = mZebra.beep(ONESHORTLO);
-    Log(lInfo) << "Beep status: "<<status;
+	TButton* b = dynamic_cast<TButton*>(Sender);
+    int status(-1);
+    if(b == mBeepBtn)
+    {
+		int status = mZebra.beep(ONESHORTLO);
+    }
+    else if(b == mDecodeSessionBtn)
+    {
+    	if(b->Caption == "Start")
+        {
+        	//Start session
+			status = mZebra.startDecodeSession();
+			b->Caption = "Stop";
+        }
+        else
+        {
+        	//Stop session
+			status = mZebra.stopDecodeSession();
+            b->Caption = "Start";
+        }
+    }
+
+    Log(lInfo) << "Command return status: "<<status;
 }
 
 //---------------------------------------------------------------------------
@@ -146,29 +167,36 @@ void __fastcall TMainForm::onWMDecode(TMessage& Msg)
 
     // wparam contains the status bits for the data ,
 	// lparam is the length of the data in bytes (cast to int).
-	unsigned char decode_buf[3001];
+	unsigned char decodeBuffer[3001];
 
 	// first thing is to copy the contents of the dll's data buffer to our own.
 	if((l < 3000) && ((w & BUFFERSIZE_MASK) == BUFFERSIZE_GOOD ))
 	{
-		memcpy(decode_buf, mZebra.getMemoryBuffer(), l);
-		decode_buf[l] = 0;
+		memcpy(decodeBuffer, mZebra.getMemoryBuffer(), l);
+		decodeBuffer[l] = 0;
 	}
 	else if( l && ((w & BUFFERSIZE_MASK) == BUFFERSIZE_ERROR ))
     {
-		strcpy((char *)decode_buf, "TOO MUCH DECODE DATA");
+		strcpy((char *)decodeBuffer, "TOO MUCH DECODE DATA");
     }
 	else
    	{
-    	strcpy((char *)decode_buf, "NO DECODE STORAGE BUFFER");
+    	strcpy((char *)decodeBuffer, "NO DECODE STORAGE BUFFER");
    	}
 
-	decode_buf[3000] = 0;
-    if(decode_buf[0] == 0x1B)
+	decodeBuffer[3000] = 0;
+    if(decodeBuffer[0] == 0x1B)
     {
-    	Log(lInfo) << "A Datamatrix barcode was encoded";
-        decode_buf[0] = ' ';
-        Log(lInfo) << decode_buf;
+
+        decodeBuffer[0] = ' ';
+        string data(reinterpret_cast<char const*>(decodeBuffer));
+        data = trimWS(data);
+    	Log(lInfo) << "A Datamatrix barcode was encoded: "<<data;
+        Log(lInfo) << decodeBuffer;
+        mBCLabel->Caption = vclstr(data);
+        //Stop session
+		mZebra.stopDecodeSession();
+        mDecodeSessionBtn->Caption = "Start";
     }
     else
     {

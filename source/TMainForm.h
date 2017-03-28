@@ -67,7 +67,7 @@ class TMainForm : public TRegistryForm
 	TButton *mConnectZebraBtn;
 	TPanel *mTopPanel;
 	TPanel *mMiddleLeftPanel;
-	TButton *Button2;
+	TButton *mBeepBtn;
 	TGroupBox *GroupBox1;
 	TGroupBox *mImagerSettingsGB;
 	TRadioGroup *mScannerAimRG;
@@ -75,6 +75,10 @@ class TMainForm : public TRegistryForm
 	TRadioGroup *mScannerLEDRG;
 	TRadioGroup *mScannerEnabledRG;
 	TComboBox *mBaudRateCB;
+	TGroupBox *GroupBox2;
+	TButton *mDecodeSessionBtn;
+	TLabel *mBCLabel;
+	TPanel *Panel2;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall FormCreate(TObject *Sender);
 
@@ -86,7 +90,7 @@ class TMainForm : public TRegistryForm
     void __fastcall LogLevelCBChange(TObject *Sender);
 	void __fastcall mConnectZebraBtnClick(TObject *Sender);
 	void __fastcall OpenAboutFormAExecute(TObject *Sender);
-	void __fastcall Button2Click(TObject *Sender);
+	void __fastcall BtnClick(TObject *Sender);
 	void __fastcall SettingsRGClick(TObject *Sender);
 
     private:

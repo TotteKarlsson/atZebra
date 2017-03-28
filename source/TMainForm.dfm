@@ -2,7 +2,7 @@ object MainForm: TMainForm
   Left = 0
   Top = 0
   Caption = 'Zebra Test Application'
-  ClientHeight = 529
+  ClientHeight = 622
   ClientWidth = 744
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -24,7 +24,7 @@ object MainForm: TMainForm
   TextHeight = 13
   object Splitter1: TSplitter
     Left = 0
-    Top = 317
+    Top = 410
     Width = 744
     Height = 3
     Cursor = crVSplit
@@ -37,26 +37,28 @@ object MainForm: TMainForm
     Left = 0
     Top = 41
     Width = 744
-    Height = 276
+    Height = 369
     Align = alClient
     Constraints.MinHeight = 276
     TabOrder = 0
+    ExplicitHeight = 276
     object mMiddleLeftPanel: TPanel
       Left = 1
       Top = 1
       Width = 336
-      Height = 274
+      Height = 367
       Align = alLeft
       TabOrder = 0
+      ExplicitHeight = 274
       object mImagerSettingsGB: TGroupBox
         Left = 1
         Top = 1
         Width = 334
-        Height = 272
+        Height = 365
         Align = alClient
         Caption = 'Functions and Settings'
         TabOrder = 0
-        ExplicitHeight = 193
+        ExplicitHeight = 272
         object mScannerAimRG: TRadioGroup
           Left = 9
           Top = 83
@@ -86,8 +88,8 @@ object MainForm: TMainForm
           OnClick = SettingsRGClick
         end
         object mScannerLEDRG: TRadioGroup
-          Left = 9
-          Top = 137
+          Left = 171
+          Top = 83
           Width = 145
           Height = 49
           Caption = 'LED'
@@ -115,42 +117,94 @@ object MainForm: TMainForm
         end
         object GroupBox1: TGroupBox
           Left = 2
-          Top = 191
+          Top = 305
           Width = 330
-          Height = 79
+          Height = 58
           Align = alBottom
           Caption = 'Beeper'
           TabOrder = 4
-          ExplicitLeft = 1
-          ExplicitTop = 194
-          ExplicitWidth = 334
-          object Button2: TButton
+          ExplicitLeft = 3
+          ExplicitTop = 210
+          object mBeepBtn: TButton
             Left = 16
-            Top = 32
+            Top = 24
             Width = 75
             Height = 25
             Caption = 'Beep'
             TabOrder = 0
-            OnClick = Button2Click
+            OnClick = BtnClick
           end
         end
+        object GroupBox2: TGroupBox
+          Left = 2
+          Top = 176
+          Width = 330
+          Height = 129
+          Align = alBottom
+          Caption = 'Session'
+          TabOrder = 5
+          object mDecodeSessionBtn: TButton
+            Left = 16
+            Top = 24
+            Width = 89
+            Height = 81
+            Caption = 'Start'
+            TabOrder = 0
+            OnClick = BtnClick
+          end
+        end
+      end
+    end
+    object Panel2: TPanel
+      Left = 337
+      Top = 1
+      Width = 406
+      Height = 367
+      Align = alClient
+      TabOrder = 1
+      ExplicitLeft = 424
+      ExplicitTop = 152
+      ExplicitWidth = 185
+      ExplicitHeight = 41
+      object mBCLabel: TLabel
+        AlignWithMargins = True
+        Left = 4
+        Top = 4
+        Width = 398
+        Height = 359
+        Align = alClient
+        Alignment = taCenter
+        Caption = 'Barcode'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = -32
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Layout = tlCenter
+        ExplicitLeft = 1
+        ExplicitTop = 1
+        ExplicitWidth = 131
+        ExplicitHeight = 39
       end
     end
   end
   object SB: TStatusBar
     Left = 0
-    Top = 510
+    Top = 603
     Width = 744
     Height = 19
     Panels = <>
+    ExplicitTop = 510
   end
   object BottomPanel: TPanel
     Left = 0
-    Top = 320
+    Top = 413
     Width = 744
     Height = 190
     Align = alBottom
     TabOrder = 2
+    ExplicitTop = 320
     object infoMemo: TMemo
       Left = 1
       Top = 49

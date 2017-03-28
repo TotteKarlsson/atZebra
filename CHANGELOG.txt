@@ -1,3 +1,9 @@
+Release 0.5.1 (March 28)
+=======================
+* Got SSI DLL compiling and functioning
+* Added ability to manually set off a decoding session
+* Added large label to show decoded data
+
 Release 0.5.0 (Jan 17)
 =======================
 * Initial commit of the Zebra application code.

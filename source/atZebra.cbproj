@@ -105,6 +105,7 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <VerInfo_Release>1</VerInfo_Release>
         <PostBuildEvent><![CDATA[xcopy $(OUTPUTDIR)*.dll $(APP_RELEASES)\atZebra /y
 xcopy $(OUTPUTDIR)*.ini $(APP_RELEASES)\atZebra /y
 xcopy $(OUTPUTDIR)$(OUTPUTFILENAME) $(APP_RELEASES)\atZebra /y
@@ -118,7 +119,7 @@ xcopy $(OUTPUTDIR)atZebra.exe $(APP_RELEASES)\atZebra /y
 $(PostBuildEvent)]]></PostBuildEvent>
         <VerInfo_MinorVer>5</VerInfo_MinorVer>
         <VerInfo_MajorVer>0</VerInfo_MajorVer>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=0.5.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=0.5.1.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <_TCHARMapping>char</_TCHARMapping>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <LinkPackageStatics>HsBarcode1DRun.lib;HsBarcode2DRun.lib;atVCLCore.lib</LinkPackageStatics>

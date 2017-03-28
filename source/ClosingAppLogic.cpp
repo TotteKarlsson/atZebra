@@ -11,7 +11,6 @@ extern string gCommonAppDataLocation;
 
 __fastcall TMainForm::~TMainForm()
 {
-	Log(lInfo) << "Destructor in Main Form";
 }
 
 //---------------------------------------------------------------------------
@@ -25,6 +24,12 @@ void __fastcall TMainForm::ShutDownTimerTimer(TObject *Sender)
 		mLogFileReader.stop();
 	}
 
+	if(mZebra.isConnected())
+    {
+    	mZebra.disconnect();
+    }
+
+    Sleep(50);
     Close();
 }
 
@@ -34,19 +39,8 @@ void __fastcall TMainForm::FormCloseQuery(TObject *Sender, bool &CanClose)
 	Log(lInfo) << "Closing down....";
 
 	//Check if we can close.. abort all threads..
-	if(mLogFileReader.isRunning() )
-    {
-		CanClose = false;
-    }
-    else
-    {
-    	CanClose = true;
-    }
-
-	if(CanClose == false)
-	{
-		ShutDownTimer->Enabled = true;
-	}
+	CanClose = (mLogFileReader.isRunning() || mZebra.isConnected()) ? false : true;
+    ShutDownTimer->Enabled = !CanClose;
 }
 
 //---------------------------------------------------------------------------
@@ -64,6 +58,5 @@ void __fastcall TMainForm::FormClose(TObject *Sender, TCloseAction &Action)
 
 	//Write to file
 	mIniFileC->save();
-
 }
 
