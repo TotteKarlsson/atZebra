@@ -79,6 +79,9 @@ class TMainForm : public TRegistryForm
 	TButton *mDecodeSessionBtn;
 	TLabel *mBCLabel;
 	TPanel *Panel2;
+	TGroupBox *GroupBox3;
+	TTimer *TestingTimer;
+	TButton *mTestStartBtn;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall FormCreate(TObject *Sender);
 
@@ -92,6 +95,8 @@ class TMainForm : public TRegistryForm
 	void __fastcall OpenAboutFormAExecute(TObject *Sender);
 	void __fastcall BtnClick(TObject *Sender);
 	void __fastcall SettingsRGClick(TObject *Sender);
+	void __fastcall mTestStartBtnClick(TObject *Sender);
+	void __fastcall TestingTimerTimer(TObject *Sender);
 
     private:
         bool                                            gCanClose;

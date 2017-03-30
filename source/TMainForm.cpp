@@ -86,13 +86,7 @@ void __fastcall TMainForm::onConnectedToZebra()
     enableDisableGroupBox(mImagerSettingsGB, true);
 
     //Turn into a 'known' state
-//	mZebra.aimOff();
-//    Sleep(10);
-//	mZebra.illuminationOff();
-//    Sleep(10);
-//    mZebra.LEDsOff();
-    Sleep(10);
-	mZebra.beep(ONESHORTLO);
+//	mZebra.beep(ONESHORTLO);
 }
 
 //---------------------------------------------------------------------------
@@ -124,6 +118,8 @@ void __fastcall TMainForm::BtnClick(TObject *Sender)
         	//Stop session
 			status = mZebra.stopDecodeSession();
             b->Caption = "Start";
+            Sleep(100);
+            mZebra.illuminationOff();
         }
     }
 
@@ -197,6 +193,11 @@ void __fastcall TMainForm::onWMDecode(TMessage& Msg)
         //Stop session
 		mZebra.stopDecodeSession();
         mDecodeSessionBtn->Caption = "Start";
+        Sleep(100);
+        mZebra.illuminationOff();
+        Sleep(100);
+        mZebra.aimOff();
+        Sleep(100);
     }
     else
     {
@@ -319,3 +320,18 @@ void __fastcall TMainForm::onSSICapabilities(TMessage& Msg)
     LPARAM l = Msg.LParam;
     Log(lInfo) << "There was an onSSICapabilities event..";
 }
+
+//---------------------------------------------------------------------------
+void __fastcall TMainForm::mTestStartBtnClick(TObject *Sender)
+{
+	TestingTimer->Enabled = !TestingTimer->Enabled;
+}
+
+//---------------------------------------------------------------------------
+void __fastcall TMainForm::TestingTimerTimer(TObject *Sender)
+{
+	//Read barcode
+    mDecodeSessionBtn->Click();
+}
+
+

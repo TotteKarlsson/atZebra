@@ -2,8 +2,8 @@ object MainForm: TMainForm
   Left = 0
   Top = 0
   Caption = 'Zebra Test Application'
-  ClientHeight = 622
-  ClientWidth = 744
+  ClientHeight = 695
+  ClientWidth = 916
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -24,8 +24,8 @@ object MainForm: TMainForm
   TextHeight = 13
   object Splitter1: TSplitter
     Left = 0
-    Top = 410
-    Width = 744
+    Top = 483
+    Width = 916
     Height = 3
     Cursor = crVSplit
     Align = alBottom
@@ -36,29 +36,30 @@ object MainForm: TMainForm
   object mMiddlePanel: TPanel
     Left = 0
     Top = 41
-    Width = 744
-    Height = 369
+    Width = 916
+    Height = 442
     Align = alClient
     Constraints.MinHeight = 276
     TabOrder = 0
-    ExplicitHeight = 276
+    ExplicitWidth = 744
+    ExplicitHeight = 369
     object mMiddleLeftPanel: TPanel
       Left = 1
       Top = 1
       Width = 336
-      Height = 367
+      Height = 440
       Align = alLeft
       TabOrder = 0
-      ExplicitHeight = 274
+      ExplicitHeight = 367
       object mImagerSettingsGB: TGroupBox
         Left = 1
         Top = 1
         Width = 334
-        Height = 365
+        Height = 438
         Align = alClient
         Caption = 'Functions and Settings'
         TabOrder = 0
-        ExplicitHeight = 272
+        ExplicitHeight = 365
         object mScannerAimRG: TRadioGroup
           Left = 9
           Top = 83
@@ -117,14 +118,13 @@ object MainForm: TMainForm
         end
         object GroupBox1: TGroupBox
           Left = 2
-          Top = 305
+          Top = 378
           Width = 330
           Height = 58
           Align = alBottom
           Caption = 'Beeper'
           TabOrder = 4
-          ExplicitLeft = 3
-          ExplicitTop = 210
+          ExplicitTop = 305
           object mBeepBtn: TButton
             Left = 16
             Top = 24
@@ -137,12 +137,13 @@ object MainForm: TMainForm
         end
         object GroupBox2: TGroupBox
           Left = 2
-          Top = 176
+          Top = 249
           Width = 330
           Height = 129
           Align = alBottom
           Caption = 'Session'
           TabOrder = 5
+          ExplicitTop = 176
           object mDecodeSessionBtn: TButton
             Left = 16
             Top = 24
@@ -158,20 +159,18 @@ object MainForm: TMainForm
     object Panel2: TPanel
       Left = 337
       Top = 1
-      Width = 406
-      Height = 367
+      Width = 578
+      Height = 440
       Align = alClient
       TabOrder = 1
-      ExplicitLeft = 424
-      ExplicitTop = 152
-      ExplicitWidth = 185
-      ExplicitHeight = 41
+      ExplicitWidth = 406
+      ExplicitHeight = 367
       object mBCLabel: TLabel
         AlignWithMargins = True
         Left = 4
         Top = 4
-        Width = 398
-        Height = 359
+        Width = 131
+        Height = 39
         Align = alClient
         Alignment = taCenter
         Caption = 'Barcode'
@@ -182,46 +181,63 @@ object MainForm: TMainForm
         Font.Style = [fsBold]
         ParentFont = False
         Layout = tlCenter
-        ExplicitLeft = 1
-        ExplicitTop = 1
-        ExplicitWidth = 131
-        ExplicitHeight = 39
+      end
+      object GroupBox3: TGroupBox
+        Left = 16
+        Top = 320
+        Width = 417
+        Height = 105
+        Caption = 'Testing'
+        TabOrder = 0
+        object mTestStartBtn: TButton
+          Left = 16
+          Top = 48
+          Width = 75
+          Height = 25
+          Caption = 'Start'
+          TabOrder = 0
+          OnClick = mTestStartBtnClick
+        end
       end
     end
   end
   object SB: TStatusBar
     Left = 0
-    Top = 603
-    Width = 744
+    Top = 676
+    Width = 916
     Height = 19
     Panels = <>
-    ExplicitTop = 510
+    ExplicitTop = 603
+    ExplicitWidth = 744
   end
   object BottomPanel: TPanel
     Left = 0
-    Top = 413
-    Width = 744
+    Top = 486
+    Width = 916
     Height = 190
     Align = alBottom
     TabOrder = 2
-    ExplicitTop = 320
+    ExplicitTop = 413
+    ExplicitWidth = 744
     object infoMemo: TMemo
       Left = 1
       Top = 49
-      Width = 742
+      Width = 914
       Height = 140
       Align = alClient
       ScrollBars = ssBoth
       TabOrder = 0
       WordWrap = False
+      ExplicitWidth = 742
     end
     object Panel1: TPanel
       Left = 1
       Top = 1
-      Width = 742
+      Width = 914
       Height = 48
       Align = alTop
       TabOrder = 1
+      ExplicitWidth = 742
       object Button1: TButton
         Left = 8
         Top = 12
@@ -256,10 +272,11 @@ object MainForm: TMainForm
   object mTopPanel: TPanel
     Left = 0
     Top = 0
-    Width = 744
+    Width = 916
     Height = 41
     Align = alTop
     TabOrder = 3
+    ExplicitWidth = 744
     object mComportCB: TComboBox
       Left = 8
       Top = 14
@@ -370,5 +387,11 @@ object MainForm: TMainForm
     OnTimer = ShutDownTimerTimer
     Left = 506
     Top = 240
+  end
+  object TestingTimer: TTimer
+    Enabled = False
+    OnTimer = TestingTimerTimer
+    Left = 648
+    Top = 376
   end
 end
