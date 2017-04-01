@@ -191,13 +191,13 @@ void __fastcall TMainForm::onWMDecode(TMessage& Msg)
         Log(lInfo) << decodeBuffer;
         mBCLabel->Caption = vclstr(data);
         //Stop session
-		mZebra.stopDecodeSession();
+//		mZebra.stopDecodeSession();
         mDecodeSessionBtn->Caption = "Start";
-        Sleep(100);
-        mZebra.illuminationOff();
-        Sleep(100);
-        mZebra.aimOff();
-        Sleep(100);
+//        Sleep(100);
+//        mZebra.illuminationOff();
+//        Sleep(100);
+//        mZebra.aimOff();
+//        Sleep(100);
     }
     else
     {

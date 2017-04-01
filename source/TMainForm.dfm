@@ -41,8 +41,6 @@ object MainForm: TMainForm
     Align = alClient
     Constraints.MinHeight = 276
     TabOrder = 0
-    ExplicitWidth = 744
-    ExplicitHeight = 369
     object mMiddleLeftPanel: TPanel
       Left = 1
       Top = 1
@@ -50,7 +48,6 @@ object MainForm: TMainForm
       Height = 440
       Align = alLeft
       TabOrder = 0
-      ExplicitHeight = 367
       object mImagerSettingsGB: TGroupBox
         Left = 1
         Top = 1
@@ -59,7 +56,6 @@ object MainForm: TMainForm
         Align = alClient
         Caption = 'Functions and Settings'
         TabOrder = 0
-        ExplicitHeight = 365
         object mScannerAimRG: TRadioGroup
           Left = 9
           Top = 83
@@ -124,7 +120,6 @@ object MainForm: TMainForm
           Align = alBottom
           Caption = 'Beeper'
           TabOrder = 4
-          ExplicitTop = 305
           object mBeepBtn: TButton
             Left = 16
             Top = 24
@@ -143,7 +138,6 @@ object MainForm: TMainForm
           Align = alBottom
           Caption = 'Session'
           TabOrder = 5
-          ExplicitTop = 176
           object mDecodeSessionBtn: TButton
             Left = 16
             Top = 24
@@ -163,14 +157,12 @@ object MainForm: TMainForm
       Height = 440
       Align = alClient
       TabOrder = 1
-      ExplicitWidth = 406
-      ExplicitHeight = 367
       object mBCLabel: TLabel
         AlignWithMargins = True
         Left = 4
         Top = 4
-        Width = 131
-        Height = 39
+        Width = 570
+        Height = 432
         Align = alClient
         Alignment = taCenter
         Caption = 'Barcode'
@@ -181,6 +173,8 @@ object MainForm: TMainForm
         Font.Style = [fsBold]
         ParentFont = False
         Layout = tlCenter
+        ExplicitWidth = 131
+        ExplicitHeight = 39
       end
       object GroupBox3: TGroupBox
         Left = 16
@@ -207,8 +201,6 @@ object MainForm: TMainForm
     Width = 916
     Height = 19
     Panels = <>
-    ExplicitTop = 603
-    ExplicitWidth = 744
   end
   object BottomPanel: TPanel
     Left = 0
@@ -217,8 +209,6 @@ object MainForm: TMainForm
     Height = 190
     Align = alBottom
     TabOrder = 2
-    ExplicitTop = 413
-    ExplicitWidth = 744
     object infoMemo: TMemo
       Left = 1
       Top = 49
@@ -228,7 +218,6 @@ object MainForm: TMainForm
       ScrollBars = ssBoth
       TabOrder = 0
       WordWrap = False
-      ExplicitWidth = 742
     end
     object Panel1: TPanel
       Left = 1
@@ -237,7 +226,6 @@ object MainForm: TMainForm
       Height = 48
       Align = alTop
       TabOrder = 1
-      ExplicitWidth = 742
       object Button1: TButton
         Left = 8
         Top = 12
@@ -276,7 +264,6 @@ object MainForm: TMainForm
     Height = 41
     Align = alTop
     TabOrder = 3
-    ExplicitWidth = 744
     object mComportCB: TComboBox
       Left = 8
       Top = 14

@@ -123,7 +123,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <_TCHARMapping>char</_TCHARMapping>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <LinkPackageStatics>HsBarcode1DRun.lib;HsBarcode2DRun.lib;atVCLCore.lib</LinkPackageStatics>
-        <Debugger_DebugSourcePath>P:\libs\dslib\VCL\Common\;P:\libs\dslib\VCL\Components\;P:\libs\dslib\Common\;P:\libs\atapi\source\serial\;P:\libs\dslib\Common\IPC\;P:\libs\atapi\thirdparty\ssidll\;P:\libs\dsl\VCL\Forms\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
+        <Debugger_DebugSourcePath>P:\libs\dslib\VCL\Common\;P:\libs\dslib\VCL\Components\;P:\libs\dslib\Common\;P:\libs\atapi\source\serial\;P:\libs\dslib\Common\IPC\;P:\libs\atapi\thirdparty\ssidll\;P:\libs\dsl\VCL\Forms\;P:\libs\dsl\VCL\Common\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
         <BCC_PCHInject>pch.h</BCC_PCHInject>
         <BCC_PCHCache>true</BCC_PCHCache>
         <Icon_MainIcon>Resources\atDB.ico</Icon_MainIcon>
@@ -248,7 +248,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>xcopy $(OUTPUTDIR)*.dll $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy $(OUTPUTDIR)*.ini $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy $(OUTPUTDIR)$(OUTPUTFILENAME) $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy p:\redist\atZebra\*.dll $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy p:\redist\atZebra\*.bpl $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy p:\build\xe3_ide\bpl\atVCLCore.bpl $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy p:\build\xe3_ide\bpl\Dune*.bpl $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy p:\build\xe3_ide\bpl\VCLCommon*.bpl $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy ..\*.txt $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy $(OUTPUTDIR)atZebra.exe $(APP_RELEASES)\atZebra /y</PostBuildEvent>
+        <PostBuildEvent>xcopy $(OUTPUTDIR)*.dll $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy $(OUTPUTDIR)*.ini $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy $(OUTPUTDIR)$(OUTPUTFILENAME) $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy p:\redist\atZebra\*.dll $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy p:\redist\atZebra\*.bpl $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy p:\build\xe3_ide\bpl\atVCLCore.bpl $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy p:\build\xe3_ide\bpl\Dune*.bpl $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy p:\build\xe3_ide\bpl\VCLCommon*.bpl $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy ..\*.txt $(APP_RELEASES)\atZebra /y&amp;&amp;xcopy $(OUTPUTDIR)atZebra.exe $(APP_RELEASES)\atZebra /y</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
 </Project>
